@@ -74,4 +74,38 @@ class MerchantRepoTest < Minitest::Test
     assert_equal "6", result.id
   end
 
+  def test_it_can_find_all_instances_based_off_of_first_name
+    data = FileReader.new.read("./test/fixture.csv")
+    repo = MerchantRepository.new(data, "sales_engine")
+    merchants = repo.manage
+    result = repo.find_all_by_first_name("Williamson")
+    assert_equal 2, result.size
+
+  end
+
+  def test_it_can_find_all_instances_based_off_of_id
+    data = FileReader.new.read("./test/fixture.csv")
+    repo = MerchantRepository.new(data, "sales_engine")
+    merchants = repo.manage
+    result = repo.find_all_by_id("2")
+    assert_equal "Klein, Rempel and Jones", result[0].name
+
+  end
+
+  def test_it_can_find_all_instances_based_off_of_created_at
+    data = FileReader.new.read("./test/fixture.csv")
+    repo = MerchantRepository.new(data, "sales_engine")
+    merchants = repo.manage
+    result = repo.find_all_by_created_at("2012-03-27 14:53:59")
+    assert_equal 6, result.size
+  end
+
+  def test_it_can_find_all_instances_based_off_of_updated_at
+    data = FileReader.new.read("./test/fixture.csv")
+    repo = MerchantRepository.new(data, "sales_engine")
+    merchants = repo.manage
+    result = repo.find_all_by_updated_at("2012-03-27 14:53:59 UTC")
+    assert_equal 5, result.size
+  end
+
 end
