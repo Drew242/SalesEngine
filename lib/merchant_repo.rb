@@ -7,7 +7,6 @@ class MerchantRepository
     @sales_engine = sales_engine
     @instances = []
   end
-
   def manage
     parser = MerchantParser.new(self)
     @instances = data.map do |line|
