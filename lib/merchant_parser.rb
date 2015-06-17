@@ -1,4 +1,5 @@
-require 'merchant'
+require_relative '../lib/merchant'
+
 class MerchantParser
   attr_reader :data
   def initialize(repo)
