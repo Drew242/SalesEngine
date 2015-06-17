@@ -50,6 +50,30 @@ class InvoiceRepoTest < Minitest::Test
     assert_equal "1", result.customer_id
   end
 
+  def test_it_can_find_an_instance_based_off_of_merchant_id
+    data = FileReader.new.read("./test/invoice_fixture.csv")
+    repo = InvoiceRepository.new(data, "sales_engine")
+    invoices = repo.manage
+    result = repo.find_by_merchant_id("2")
+    assert_equal "1", result.customer_id
+  end
+
+  def test_it_can_find_an_instance_based_off_of_customer_id
+    data = FileReader.new.read("./test/invoice_fixture.csv")
+    repo = InvoiceRepository.new(data, "sales_engine")
+    invoices = repo.manage
+    result = repo.find_by_customer_id("1")
+    assert_equal "26", result.merchant_id
+  end
+
+  def test_it_can_find_an_instance_based_off_of_status
+    data = FileReader.new.read("./test/invoice_fixture.csv")
+    repo = InvoiceRepository.new(data, "sales_engine")
+    invoices = repo.manage
+    result = repo.find_by_status("shipped")
+    assert_equal "1", result.customer_id
+  end
+
   def test_it_can_find_an_instance_based_off_of_created_at
     data = FileReader.new.read("./test/invoice_fixture.csv")
     repo = InvoiceRepository.new(data, "sales_engine")

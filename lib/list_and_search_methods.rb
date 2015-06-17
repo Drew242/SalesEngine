@@ -92,4 +92,32 @@ module ListSearch
     return result
 
   end
+
+  def find_by_merchant_id(id)
+
+    instances.each do |instance|
+      if instance.merchant_id.include?(id)
+        return instance
+      end
+    end
+
+  end
+
+  def find_by_customer_id(id)
+
+    instances.each do |instance|
+      if instance.customer_id.include?(id)
+        return instance
+      end
+    end
+
+  end
+
+  def find_by_status(status)
+    instances.each do |instance|
+      if instance.status.include?(status)
+        return instance
+      end
+    end
+  end
 end
