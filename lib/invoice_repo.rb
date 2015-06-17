@@ -16,7 +16,7 @@ class InvoiceRepository
 
   def find_by_status(status)
     instances.each do |instance|
-      if instance.status.include?(status)
+      if instance.status.downcase.include?(status.downcase)
         return instance
       end
     end

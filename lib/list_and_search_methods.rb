@@ -7,31 +7,10 @@ module ListSearch
     instances.shuffle.first
   end
 
-
-  def find_by_first_name(first_name)
-
-    instances.each do |instance|
-      if instance.first_name.include?(first_name)
-        return instance
-      end
-    end
-
-  end
-
-  def find_by_last_name(last_name)
-
-    instances.each do |instance|
-    if instance.last_name.include?(last_name)
-        return instance
-      end
-    end
-
-  end
-
   def find_by_id(id)
 
     instances.each do |instance|
-      if instance.id.include?(id)
+      if instance.id.downcase.include?(id.downcase)
         return instance
       end
     end
@@ -40,7 +19,7 @@ module ListSearch
 
   def find_by_created_at(date)
     instances.each do |instance|
-      if instance.created.include?(date)
+      if instance.created.downcase.include?(date.downcase)
         return instance
       end
     end
@@ -50,51 +29,18 @@ module ListSearch
   def find_by_updated_at(date)
 
     instances.each do |instance|
-      if instance.updated.include?(date)
+      if instance.updated.downcase.include?(date.downcase)
         return instance
       end
     end
   end
 
-  def find_all_by_name(name)
-
-    result =[]
-    instances.each do |instance|
-      if instance.name.include?(name)
-        result << instance
-      end
-    end
-    return result
-
-  end
-
-  def find_all_by_first_name(first_name)
-    result =[]
-    instances.each do |instance|
-      if instance.first_name.include?(first_name)
-        result << instance
-      end
-    end
-    return result
-
-  end
-
-  def find_all_by_last_name(last_name)
-    result =[]
-    instances.each do |instance|
-      if instance.last_name.include?(last_name)
-        result << instance
-      end
-    end
-    return result
-
-  end
 
   def find_all_by_id(id)
 
     result =[]
     instances.each do |instance|
-      if instance.id.include?(id)
+      if instance.id.downcase.include?(id.downcase)
         result << instance
       end
     end
@@ -106,7 +52,7 @@ module ListSearch
 
     result =[]
     instances.each do |instance|
-      if instance.created.include?(created_at)
+      if instance.created.downcase.include?(created_at.downcase)
         result << instance
       end
     end
@@ -118,7 +64,7 @@ module ListSearch
 
     result =[]
     instances.each do |instance|
-      if instance.updated.include?(updated_at)
+      if instance.updated.downcase.include?(updated_at.downcase)
         result << instance
       end
     end
@@ -129,7 +75,7 @@ module ListSearch
   def find_by_merchant_id(id)
 
     instances.each do |instance|
-      if instance.merchant_id.include?(id)
+      if instance.merchant_id.downcase.include?(id.downcase)
         return instance
       end
     end
@@ -139,18 +85,12 @@ module ListSearch
   def find_by_customer_id(id)
 
     instances.each do |instance|
-      if instance.customer_id.include?(id)
+      if instance.customer_id.downcase.include?(id.downcase)
         return instance
       end
     end
 
   end
 
-  def find_by_status(status)
-    instances.each do |instance|
-      if instance.status.include?(status)
-        return instance
-      end
-    end
-  end
+
 end

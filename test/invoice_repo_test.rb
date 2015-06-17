@@ -70,7 +70,7 @@ class InvoiceRepoTest < Minitest::Test
     data = FileReader.new.read("./test/invoice_fixture.csv")
     repo = InvoiceRepository.new(data, "sales_engine")
     invoices = repo.manage
-    result = repo.find_by_status("shipped")
+    result = repo.find_by_status("ShiPped")
     assert_equal "1", result.customer_id
   end
 

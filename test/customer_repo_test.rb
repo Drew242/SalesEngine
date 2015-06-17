@@ -46,7 +46,7 @@ class CustomerRepoTest < Minitest::Test
     data = FileReader.new.read("./test/customer_fixture.csv")
     repo = CustomerRepository.new(data, "sales_engine")
     customers = repo.manage
-    result = repo.find_by_first_name("Mariah")
+    result = repo.find_by_first_name("MarIah")
     assert_equal "3", result.id
   end
 
@@ -54,7 +54,7 @@ class CustomerRepoTest < Minitest::Test
     data = FileReader.new.read("./test/customer_fixture.csv")
     repo = CustomerRepository.new(data, "sales_engine")
     customers = repo.manage
-    result = repo.find_by_last_name("Braun")
+    result = repo.find_by_last_name("BrAun")
     assert_equal "4", result.id
   end
 
@@ -83,5 +83,3 @@ class CustomerRepoTest < Minitest::Test
   end
 
 end
-
-

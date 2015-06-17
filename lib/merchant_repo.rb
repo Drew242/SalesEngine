@@ -17,7 +17,7 @@ class MerchantRepository
 
   def find_by_name(name)
     instances.each do |instance|
-      if instance.name.include?(name)
+      if instance.name.downcase.include?(name.downcase)
         return instance
       end
     end
@@ -27,7 +27,7 @@ class MerchantRepository
 
     result =[]
     instances.each do |instance|
-      if instance.name.include?(name)
+      if instance.name.downcase.include?(name.downcase)
         result << instance
       end
     end

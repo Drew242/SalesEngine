@@ -19,7 +19,6 @@ class MerchantParserTest < Minitest::Test
   end
 
   def test_it_creates_an_instance_of_merchant
-
     data = {name: "Schroeder"}
     parser = MerchantParser.new("repo")
     result = parser.convert(data)

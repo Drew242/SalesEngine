@@ -46,7 +46,7 @@ class MerchantRepoTest < Minitest::Test
     data = FileReader.new.read("./test/fixture.csv")
     repo = MerchantRepository.new(data, "sales_engine")
     merchants = repo.manage
-    result = repo.find_by_name("Klein")
+    result = repo.find_by_name("klEin")
     assert_equal "2", result.id
   end
 
@@ -70,7 +70,7 @@ class MerchantRepoTest < Minitest::Test
     data = FileReader.new.read("./test/fixture.csv")
     repo = MerchantRepository.new(data, "sales_engine")
     merchants = repo.manage
-    result = repo.find_by_updated_at("2012-03-27 16:12:25 UTC")
+    result = repo.find_by_updated_at("2012-03-27 16:12:25 UtC")
     assert_equal "6", result.id
   end
 
@@ -78,7 +78,7 @@ class MerchantRepoTest < Minitest::Test
     data = FileReader.new.read("./test/fixture.csv")
     repo = MerchantRepository.new(data, "sales_engine")
     merchants = repo.manage
-    result = repo.find_all_by_name("Williamson")
+    result = repo.find_all_by_name("WilliamSon")
     assert_equal 2, result.size
   end
 
@@ -87,7 +87,7 @@ class MerchantRepoTest < Minitest::Test
     data = FileReader.new.read("./test/fixture.csv")
     repo = MerchantRepository.new(data, "sales_engine")
     merchants = repo.manage
-    result = repo.find_all_by_name("Klein")
+    result = repo.find_all_by_name("KleIn")
     assert_equal 1, result.count
 
   end
