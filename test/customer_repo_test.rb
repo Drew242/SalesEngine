@@ -6,7 +6,7 @@ require_relative '../lib/file_reader'
 
 class CustomerRepoTest < Minitest::Test
   def setup
-    @file = File.expand_path("../test/customer_fixture.csv", __dir__)
+    @file = File.expand_path("../test/fixtures/customer_fixture.csv", __dir__)
   end
 
   def test_it_can_hold_a_new_customer
@@ -26,7 +26,7 @@ class CustomerRepoTest < Minitest::Test
   end
 
   def test_it_returns_all_customers
-    data = FileReader.new.read("./test/fixture.csv")
+    data = FileReader.new.read(@file)
     repo = CustomerRepository.new(data, "sales_engine")
     customers = repo.manage
     result = repo.all

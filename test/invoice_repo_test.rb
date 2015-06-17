@@ -6,7 +6,7 @@ require_relative '../lib/file_reader'
 
 class InvoiceRepoTest < Minitest::Test
   def setup
-    @file = File.expand_path("../test/invoice_fixture.csv", __dir__)
+    @file = File.expand_path("../test/fixtures/invoice_fixture.csv", __dir__)
   end
 
   def test_it_can_hold_a_new_invoice
