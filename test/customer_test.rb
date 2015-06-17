@@ -1,6 +1,6 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/customer'
+require_relative '../lib/customer'
 
 class CustomerTest < Minitest::Test
   def test_it_has_a_first_name

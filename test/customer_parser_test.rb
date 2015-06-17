@@ -1,6 +1,6 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/customer_parser'
+require_relative '../lib/customer_parser'
 
 
 class CustomerParserTest < Minitest::Test
@@ -27,4 +27,3 @@ class CustomerParserTest < Minitest::Test
   end
 
 end
-

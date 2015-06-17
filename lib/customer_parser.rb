@@ -1,4 +1,4 @@
-require 'customer'
+require_relative '../lib/customer'
 class CustomerParser
   attr_reader :data
   def initialize(repo)

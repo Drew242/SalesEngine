@@ -1,4 +1,4 @@
-require 'invoice'
+require_relative '../lib/invoice'
 class InvoiceParser
   attr_reader :data
   def initialize(repo)

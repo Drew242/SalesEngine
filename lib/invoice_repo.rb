@@ -1,4 +1,5 @@
-require './lib/list_and_search_methods'
+require_relative '../lib/list_and_search_methods'
+require_relative '../lib/invoice_parser'
 class InvoiceRepository
   include ListSearch
   attr_reader :data, :sales_engine, :instances

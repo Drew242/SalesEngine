@@ -1,21 +1,23 @@
 require 'minitest/autorun'
 require 'csv'
 require 'minitest/pride'
-require './lib/invoice_repo'
-require 'file_reader'
+require_relative '../lib/invoice_repo'
+require_relative '../lib/file_reader'
 
 class InvoiceRepoTest < Minitest::Test
-
+  def setup
+    @file = File.expand_path("../test/invoice_fixture.csv", __dir__)
+  end
 
   def test_it_can_hold_a_new_invoice
-    data = FileReader.new.read("./test/invoice_fixture.csv")
+    data = FileReader.new.read(@file)
     repo = InvoiceRepository.new(data, "sales_engine")
     invoices = repo.manage
     refute invoices.empty?
   end
 
   def test_it_can_return_correct_size
-    data = FileReader.new.read("./test/invoice_fixture.csv")
+    data = FileReader.new.read(@file)
     repo = InvoiceRepository.new(data, "sales_engine")
     invoices = repo.manage
     result = repo.all
@@ -24,7 +26,7 @@ class InvoiceRepoTest < Minitest::Test
   end
 
   def test_it_returns_all_invoices
-    data = FileReader.new.read("./test/invoice_fixture.csv")
+    data = FileReader.new.read(@file)
     repo = InvoiceRepository.new(data, "sales_engine")
     invoices = repo.manage
     result = repo.all
@@ -34,7 +36,7 @@ class InvoiceRepoTest < Minitest::Test
   end
 
   def test_it_can_find_random
-    data = FileReader.new.read("./test/invoice_fixture.csv")
+    data = FileReader.new.read(@file)
     repo = InvoiceRepository.new(data, "sales_engine")
     invoices = repo.manage
     random = repo.random
@@ -43,7 +45,7 @@ class InvoiceRepoTest < Minitest::Test
   end
 
   def test_it_can_find_an_instance_based_off_of_id
-    data = FileReader.new.read("./test/invoice_fixture.csv")
+    data = FileReader.new.read(@file)
     repo = InvoiceRepository.new(data, "sales_engine")
     invoices = repo.manage
     result = repo.find_by_id("2")
@@ -51,7 +53,7 @@ class InvoiceRepoTest < Minitest::Test
   end
 
   def test_it_can_find_an_instance_based_off_of_merchant_id
-    data = FileReader.new.read("./test/invoice_fixture.csv")
+    data = FileReader.new.read(@file)
     repo = InvoiceRepository.new(data, "sales_engine")
     invoices = repo.manage
     result = repo.find_by_merchant_id("2")
@@ -59,7 +61,7 @@ class InvoiceRepoTest < Minitest::Test
   end
 
   def test_it_can_find_an_instance_based_off_of_customer_id
-    data = FileReader.new.read("./test/invoice_fixture.csv")
+    data = FileReader.new.read(@file)
     repo = InvoiceRepository.new(data, "sales_engine")
     invoices = repo.manage
     result = repo.find_by_customer_id("1")
@@ -67,7 +69,7 @@ class InvoiceRepoTest < Minitest::Test
   end
 
   def test_it_can_find_an_instance_based_off_of_status
-    data = FileReader.new.read("./test/invoice_fixture.csv")
+    data = FileReader.new.read(@file)
     repo = InvoiceRepository.new(data, "sales_engine")
     invoices = repo.manage
     result = repo.find_by_status("ShiPped")
@@ -75,7 +77,7 @@ class InvoiceRepoTest < Minitest::Test
   end
 
   def test_it_can_find_an_instance_based_off_of_created_at
-    data = FileReader.new.read("./test/invoice_fixture.csv")
+    data = FileReader.new.read(@file)
     repo = InvoiceRepository.new(data, "sales_engine")
     invoices = repo.manage
     result = repo.find_by_created_at("2012-03-25 09:54:09 UTC")
@@ -83,7 +85,7 @@ class InvoiceRepoTest < Minitest::Test
   end
 
   def test_it_can_find_an_instance_based_off_updated_at
-    data = FileReader.new.read("./test/invoice_fixture.csv")
+    data = FileReader.new.read(@file)
     repo = InvoiceRepository.new(data, "sales_engine")
     invoices = repo.manage
     result = repo.find_by_updated_at("2012-03-12 05:54:09 UTC")
@@ -92,7 +94,7 @@ class InvoiceRepoTest < Minitest::Test
 
 
   def test_it_can_find_all_instances_based_off_of_id
-    data = FileReader.new.read("./test/invoice_fixture.csv")
+    data = FileReader.new.read(@file)
     repo = InvoiceRepository.new(data, "sales_engine")
     invoices = repo.manage
     result = repo.find_all_by_id("2")
@@ -101,7 +103,7 @@ class InvoiceRepoTest < Minitest::Test
   end
 
   def test_it_can_find_all_instances_based_off_of_created_at
-    data = FileReader.new.read("./test/invoice_fixture.csv")
+    data = FileReader.new.read(@file)
     repo = InvoiceRepository.new(data, "sales_engine")
     invoices = repo.manage
     result = repo.find_all_by_created_at("2012-03-25 09:54:09 UTC")
@@ -109,7 +111,7 @@ class InvoiceRepoTest < Minitest::Test
   end
 
   def test_it_can_find_all_instances_based_off_of_updated_at
-    data = FileReader.new.read("./test/invoice_fixture.csv")
+    data = FileReader.new.read(@file)
     repo = InvoiceRepository.new(data, "sales_engine")
     invoices = repo.manage
     result = repo.find_all_by_updated_at("2012-03-12 05:54:09 UTC")

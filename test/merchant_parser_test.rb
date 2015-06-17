@@ -1,6 +1,6 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/merchant_parser'
+require_relative '../lib/merchant_parser'
 
 
 class MerchantParserTest < Minitest::Test

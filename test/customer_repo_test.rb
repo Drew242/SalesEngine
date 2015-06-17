@@ -1,21 +1,23 @@
 require 'minitest/autorun'
 require 'csv'
 require 'minitest/pride'
-require './lib/customer_repo'
-require 'file_reader'
+require_relative '../lib/customer_repo'
+require_relative '../lib/file_reader'
 
 class CustomerRepoTest < Minitest::Test
-
+  def setup
+    @file = File.expand_path("../test/customer_fixture.csv", __dir__)
+  end
 
   def test_it_can_hold_a_new_customer
-    data = FileReader.new.read("./test/customer_fixture.csv")
+    data = FileReader.new.read(@file)
     repo = CustomerRepository.new(data, "sales_engine")
     customer = repo.manage
     refute customer.empty?
   end
 
   def test_it_can_return_correct_size
-    data = FileReader.new.read("./test/customer_fixture.csv")
+    data = FileReader.new.read(@file)
     repo = CustomerRepository.new(data, "sales_engine")
     customers = repo.manage
     result = repo.all
@@ -34,7 +36,7 @@ class CustomerRepoTest < Minitest::Test
   end
 
   def test_it_can_find_random
-    data = FileReader.new.read("./test/customer_fixture.csv")
+    data = FileReader.new.read(@file)
     repo = CustomerRepository.new(data, "sales_engine")
     customers = repo.manage
     random = repo.random
@@ -43,7 +45,7 @@ class CustomerRepoTest < Minitest::Test
   end
 
   def test_it_can_find_an_instance_based_off_of_first_name
-    data = FileReader.new.read("./test/customer_fixture.csv")
+    data = FileReader.new.read(@file)
     repo = CustomerRepository.new(data, "sales_engine")
     customers = repo.manage
     result = repo.find_by_first_name("MarIah")
@@ -51,7 +53,7 @@ class CustomerRepoTest < Minitest::Test
   end
 
   def test_it_can_find_an_instance_based_off_of_last_name
-    data = FileReader.new.read("./test/customer_fixture.csv")
+    data = FileReader.new.read(@file)
     repo = CustomerRepository.new(data, "sales_engine")
     customers = repo.manage
     result = repo.find_by_last_name("BrAun")
@@ -59,7 +61,7 @@ class CustomerRepoTest < Minitest::Test
   end
 
   def test_it_can_find_an_instance_based_off_of_id
-    data = FileReader.new.read("./test/customer_fixture.csv")
+    data = FileReader.new.read(@file)
     repo = CustomerRepository.new(data, "sales_engine")
     customers = repo.manage
     result = repo.find_by_id("2")
@@ -67,7 +69,7 @@ class CustomerRepoTest < Minitest::Test
   end
 
   def test_it_can_find_an_instance_based_off_of_created_at
-    data = FileReader.new.read("./test/customer_fixture.csv")
+    data = FileReader.new.read(@file)
     repo = CustomerRepository.new(data, "sales_engine")
     customers = repo.manage
     result = repo.find_by_created_at("2012-03-27 14:54:09 UTC")
@@ -75,7 +77,7 @@ class CustomerRepoTest < Minitest::Test
   end
 
   def test_it_can_find_an_instance_based_off_updated_at
-    data = FileReader.new.read("./test/customer_fixture.csv")
+    data = FileReader.new.read(@file)
     repo = CustomerRepository.new(data, "sales_engine")
     customers = repo.manage
     result = repo.find_by_updated_at("2012-03-27 14:54:10 UTC")
