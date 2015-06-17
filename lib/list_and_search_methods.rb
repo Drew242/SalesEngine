@@ -62,6 +62,16 @@ module ListSearch
     return result
   end
 
+  def find_all_by_unit_price(price)
+    result =[]
+    instances.select do |instance|
+      if instance.price.include?(price)
+        result << instance
+      end
+    end
+    return result
+  end
+
   def find_by_merchant_id(id)
     instances.select do |instance|
       if instance.merchant_id.downcase.include?(id.downcase)
@@ -73,6 +83,14 @@ module ListSearch
   def find_by_customer_id(id)
     instances.select do |instance|
       if instance.customer_id.downcase.include?(id.downcase)
+        return instance
+      end
+    end
+  end
+
+  def find_by_unit_price(price)
+    instances.select do |instance|
+      if instance.price.include?(price)
         return instance
       end
     end

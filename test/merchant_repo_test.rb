@@ -19,11 +19,10 @@ class MerchantRepoTest < Minitest::Test
   end
 
   def test_it_can_return_correct_size
-    data = FileReader.new.read(@file)
-    repo = MerchantRepository.new(data, "sales_engine")
+    repo = MerchantRepository.new([{id: 2, name: "Joe"}, {id: 1, name: "Jim"}], "sales_engine")
     merchants = repo.manage
     result = repo.all
-    assert_equal  6 , result.size
+    assert_equal  2 , result.size
 
   end
 
