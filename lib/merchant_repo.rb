@@ -1,3 +1,4 @@
+
 require './lib/list_and_search_methods'
 class MerchantRepository
   include ListSearch
