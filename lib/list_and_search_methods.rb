@@ -7,14 +7,6 @@ module ListSearch
     instances.shuffle.first
   end
 
-  def find_by_name(name)
-    instances.each do |instance|
-      if instance.name.include?(name)
-        return instance
-      end
-    end
-
-  end
 
   def find_by_first_name(first_name)
 

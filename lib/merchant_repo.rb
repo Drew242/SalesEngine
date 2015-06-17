@@ -14,4 +14,23 @@ class MerchantRepository
       parser.convert(line)
     end
   end
+
+  def find_by_name(name)
+    instances.each do |instance|
+      if instance.name.include?(name)
+        return instance
+      end
+    end
+  end
+
+  def find_all_by_name(name)
+
+    result =[]
+    instances.each do |instance|
+      if instance.name.include?(name)
+        result << instance
+      end
+    end
+    return result
+  end
 end

@@ -31,4 +31,3 @@ class CustomerParser
   end
 
 end
-

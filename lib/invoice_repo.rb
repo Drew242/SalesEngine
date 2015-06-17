@@ -13,4 +13,12 @@ class InvoiceRepository
       parser.convert(line)
     end
   end
+
+  def find_by_status(status)
+    instances.each do |instance|
+      if instance.status.include?(status)
+        return instance
+      end
+    end
+  end
 end
