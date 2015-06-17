@@ -16,23 +16,19 @@ class CustomerRepository
   end
 
   def find_by_first_name(first_name)
-
     instances.select do |instance|
       if instance.first_name.downcase.include?(first_name.downcase)
         return instance
       end
     end
   end
-  def find_by_last_name(last_name)
 
+  def find_by_last_name(last_name)
     instances.select do |instance|
       if instance.last_name.downcase.include?(last_name.downcase)
         return instance
       end
     end
   end
-
-
-
 
 end
