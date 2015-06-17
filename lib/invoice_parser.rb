@@ -7,7 +7,9 @@ class InvoiceParser
 
   def convert(data)
     @data = data
-    return Invoice.new(get_id,get_customer_id,get_merchant_id,get_status,get_created,get_updated, @repo)
+    return Invoice.new(get_id,get_customer_id,
+                      get_merchant_id,get_status,
+                      get_created,get_updated, @repo)
   end
 
   def get_customer_id

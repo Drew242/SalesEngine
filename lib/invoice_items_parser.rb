@@ -8,7 +8,9 @@ class InvoiceItemsParser
 
   def convert(data)
     @data = data
-    return InvoiceItem.new(get_id,get_item_id,get_invoice_id,get_quantity,get_price,get_created,get_updated, @repo)
+    return InvoiceItem.new(get_id,get_item_id,get_invoice_id,
+                          get_quantity,get_price,get_created,
+                          get_updated, @repo)
   end
 
   def get_item_id

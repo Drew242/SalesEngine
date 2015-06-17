@@ -12,14 +12,13 @@ class InvoiceItemsRepoTest < Minitest::Test
   def test_it_can_hold_a_new_invoice_item
     data = FileReader.new.read(@file)
     repo = InvoiceItemsRepository.new(data, "sales_engine")
-    items = repo.manage
-    refute items.empty?
+
+    refute repo.instances.empty?
   end
 
   def test_it_can_return_correct_size
     data = FileReader.new.read(@file)
     repo = InvoiceItemsRepository.new(data, "sales_engine")
-    invoices = repo.manage
     result = repo.all
     assert_equal  6 , result.size
 
@@ -28,7 +27,6 @@ class InvoiceItemsRepoTest < Minitest::Test
   def test_it_returns_all_invoice_items
     data = FileReader.new.read(@file)
     repo = InvoiceItemsRepository.new(data, "sales_engine")
-    invoices = repo.manage
     result = repo.all
     result.map do |invoice|
       assert_equal InvoiceItem, invoice.class
@@ -38,7 +36,7 @@ class InvoiceItemsRepoTest < Minitest::Test
   def test_it_can_find_random
     data = FileReader.new.read(@file)
     repo = InvoiceItemsRepository.new(data, "sales_engine")
-    invoice_items = repo.manage
+    invoice_items = repo.instances
     random = repo.random
     invoice_items.delete(random)
     refute repo.all.include?(random)

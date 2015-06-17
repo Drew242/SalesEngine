@@ -6,11 +6,11 @@ class InvoiceRepository
   def initialize(data, sales_engine)
     @data         = data
     @sales_engine = sales_engine
-    @instances = []
+    @instances = manage
   end
   def manage
     parser = InvoiceParser.new(self)
-    @instances = data.map do |line|
+    return data.map do |line|
       parser.convert(line)
     end
   end

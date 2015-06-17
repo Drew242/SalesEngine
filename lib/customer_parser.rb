@@ -7,7 +7,12 @@ class CustomerParser
 
   def convert(data)
     @data = data
-    return Customer.new(get_id,get_first_name,get_last_name,get_created,get_updated, @repo)
+    return Customer.new(get_id,
+    get_first_name,
+    get_last_name,
+    get_created,
+    get_updated,
+    @repo)
   end
 
   def get_first_name

@@ -1,5 +1,11 @@
 class Invoice
-  attr_reader :id, :customer_id, :merchant_id, :status, :created, :updated, :repo
+  attr_reader :id,
+              :customer_id,
+              :merchant_id,
+              :status,
+              :created,
+              :updated,
+              :repo
 
   def initialize(id,customer_id,merchant_id,status,created_at,updated_at, repo)
     @id          = id

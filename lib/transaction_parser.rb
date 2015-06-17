@@ -8,7 +8,10 @@ class TransactionParser
 
   def convert(data)
     @data = data
-    return Transactions.new(get_id,get_invoice_id,get_cc_num, get_cc_ex, get_result, get_created,get_updated, @repo)
+    return Transactions.new(get_id,get_invoice_id,
+                            get_cc_num, get_cc_ex,
+                            get_result, get_created,
+                            get_updated, @repo)
   end
 
   def get_result

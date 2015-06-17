@@ -12,14 +12,12 @@ class ItemsRepoTest < Minitest::Test
   def test_it_can_hold_a_new_item
     data = FileReader.new.read(@file)
     repo = ItemsRepository.new(data, "sales_engine")
-    item = repo.manage
-    refute item.empty?
+    refute repo.instances.empty?
   end
 
   def test_it_can_return_correct_size
     data = FileReader.new.read(@file)
     repo = ItemsRepository.new(data, "sales_engine")
-    item = repo.manage
     result = repo.all
     assert_equal  5 , result.size
   end
@@ -27,7 +25,6 @@ class ItemsRepoTest < Minitest::Test
   def test_it_returns_all_items
     data = FileReader.new.read(@file)
     repo = ItemsRepository.new(data, "sales_engine")
-    items = repo.manage
     result = repo.all
     result.map do |items|
       assert_equal Items, items.class
@@ -37,8 +34,8 @@ class ItemsRepoTest < Minitest::Test
   def test_it_can_find_random
     data = FileReader.new.read(@file)
     repo = ItemsRepository.new(data, "sales_engine")
-    items = repo.manage
     random = repo.random
+    items = repo.instances
     items.delete(random)
     refute items.include?(random)
   end
@@ -46,7 +43,6 @@ class ItemsRepoTest < Minitest::Test
   def test_it_can_find_an_instance_based_off_of_name
     data = FileReader.new.read(@file)
     repo = ItemsRepository.new(data, "sales_engine")
-    item = repo.manage
     result = repo.find_by_name("Item Ea Voluptatum")
     assert_equal "3", result.id
   end
@@ -54,7 +50,6 @@ class ItemsRepoTest < Minitest::Test
   def test_it_can_find_an_instance_based_off_of_id
     data = FileReader.new.read(@file)
     repo = ItemsRepository.new(data, "sales_engine")
-    item = repo.manage
     result = repo.find_by_id("2")
     assert_equal "Item Autem Minima", result.name
   end
@@ -62,7 +57,6 @@ class ItemsRepoTest < Minitest::Test
   def test_it_can_find_an_instance_based_off_of_description
     data = FileReader.new.read(@file)
     repo = ItemsRepository.new(data, "sales_engine")
-    item = repo.manage
     result = repo.find_by_description("Nihil autem sit odio inventore deleniti.")
     assert_equal "1", result.id
   end
@@ -70,15 +64,13 @@ class ItemsRepoTest < Minitest::Test
   def test_it_can_find_an_instance_based_off_of_unit_price
     data = FileReader.new.read(@file)
     repo = ItemsRepository.new(data, "sales_engine")
-    item = repo.manage
     result = repo.find_by_unit_price("75107")
     assert_equal "1", result.id
   end
-  
+
   def test_it_can_find_an_instance_based_off_of_merchant_id
     data = FileReader.new.read(@file)
     repo = ItemsRepository.new(data, "sales_engine")
-    item = repo.manage
     result = repo.find_by_merchant_id("1")
     assert_equal "1", result.id
   end
@@ -86,7 +78,6 @@ class ItemsRepoTest < Minitest::Test
   def test_it_can_find_an_instance_based_off_of_created_at
     data = FileReader.new.read(@file)
     repo = ItemsRepository.new(data, "sales_engine")
-    item = repo.manage
     result = repo.find_by_created_at("2012-03-27 14:53:59 UTC")
     assert_equal "1", result.id
   end
@@ -94,7 +85,6 @@ class ItemsRepoTest < Minitest::Test
   def test_it_can_find_an_instance_based_off_updated_at
     data = FileReader.new.read(@file)
     repo = ItemsRepository.new(data, "sales_engine")
-    item = repo.manage
     result = repo.find_by_updated_at("2012-03-27 14:53:59 UTC")
     assert_equal "1", result.id
   end
