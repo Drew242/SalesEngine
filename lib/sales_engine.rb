@@ -3,13 +3,13 @@ require 'csv'
 class SalesEngine
 
   def get_data
-    reader        = FileReader.new
-    @merchants    = reader.read("./data/merchants.csv")
-    @customers    = reader.read("./data/customers.csv")
-    @transactions = reader.read("./data/transactions.csv")
-    @invoices     = reader.read("./data/invoices.csv")
-    @invoice_items= reader.read("./data/invoice_items.csv")
-    @items        = reader.read("./data/items.csv")
+    reader         = FileReader.new
+    @merchants     = reader.read("./data/merchants.csv")
+    @customers     = reader.read("./data/customers.csv")
+    @transactions  = reader.read("./data/transactions.csv")
+    @invoices      = reader.read("./data/invoices.csv")
+    @invoice_items = reader.read("./data/invoice_items.csv")
+    @items         = reader.read("./data/items.csv")
   end
 
   def startup
