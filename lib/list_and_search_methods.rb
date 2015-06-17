@@ -15,6 +15,26 @@ module ListSearch
     end
   end
 
+  def find_by_name(name)
+    instances.select do |instance|
+      if instance.name.downcase.include?(name.downcase)
+        return instance
+      end
+    end
+  end
+
+
+  def find_all_by_name(name)
+    result =[]
+    instances.select do |instance|
+      if instance.name.downcase.include?(name.downcase)
+        result << instance
+      end
+    end
+    return result
+  end
+
+
   def find_by_created_at(date)
     instances.select do |instance|
       if instance.created.downcase.include?(date.downcase)

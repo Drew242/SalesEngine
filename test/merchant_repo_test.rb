@@ -120,20 +120,4 @@ class MerchantRepoTest < Minitest::Test
     assert_equal 5, result.size
   end
 
-  def test_it_can_find_all_instances_based_off_of_created
-    data = FileReader.new.read(@file)
-    repo = MerchantRepository.new(data, "sales_engine")
-    merchants = repo.manage
-    result = repo.find_all_by_created_at("2012-03-27 14:53:59 UTC")
-    assert_equal 6, result.count
-  end
-
-  def test_it_can_find_all_instances_based_off_of_updated
-    data = FileReader.new.read(@file)
-    repo = MerchantRepository.new(data, "sales_engine")
-    merchants = repo.manage
-    result = repo.find_all_by_updated_at("2012-03-27 16:12:25 UTC")
-    assert_equal 1, result.count
-  end
-
 end

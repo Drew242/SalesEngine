@@ -26,7 +26,7 @@ class SalesEngine
     transactions_repo  = TransactionsRepository.new(@transactions, self)
     invoices_repo      = InvoiceRepository.new(@invoices, self)
     invoice_items_repo = InvoiceItemsRepository.new(@invoice_items, self)
-    items_repo         = ItemsRepository.new(@items, self)
+    items_repo         = ItemsRepo.new(@items, self)
   end
 
 
