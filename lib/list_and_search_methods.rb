@@ -8,10 +8,9 @@ module ListSearch
   end
 
   def find_by_name(name)
-
     instances.each do |instance|
       if instance.name.include?(name)
-        return  instance
+        return instance
       end
     end
 
@@ -21,7 +20,7 @@ module ListSearch
 
     instances.each do |instance|
       if instance.first_name.include?(first_name)
-        return  instance
+        return instance
       end
     end
 
@@ -30,8 +29,8 @@ module ListSearch
   def find_by_last_name(last_name)
 
     instances.each do |instance|
-      if instance.last_name.include?(last_name)
-        return  instance
+    if instance.last_name.include?(last_name)
+        return instance
       end
     end
 
@@ -78,10 +77,9 @@ module ListSearch
   end
 
   def find_all_by_first_name(first_name)
-
     result =[]
     instances.each do |instance|
-      if instance.name.include?(first_name)
+      if instance.first_name.include?(first_name)
         result << instance
       end
     end
@@ -90,7 +88,6 @@ module ListSearch
   end
 
   def find_all_by_last_name(last_name)
-
     result =[]
     instances.each do |instance|
       if instance.last_name.include?(last_name)
