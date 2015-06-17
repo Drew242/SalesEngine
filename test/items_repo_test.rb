@@ -34,6 +34,7 @@ class ItemsRepoTest < Minitest::Test
   def test_it_can_find_random
     data = FileReader.new.read(@file)
     repo = ItemsRepository.new(data, "sales_engine")
+
     random = repo.random
     items = repo.instances
     items.delete(random)
@@ -53,6 +54,7 @@ class ItemsRepoTest < Minitest::Test
     result = repo.find_by_id("2")
     assert_equal "Item Autem Minima", result.name
   end
+
 
   def test_it_can_find_an_instance_based_off_of_description
     data = FileReader.new.read(@file)

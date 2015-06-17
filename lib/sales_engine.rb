@@ -11,7 +11,6 @@ class SalesEngine
 
 
   def startup(data = get_data())
-
     reader         = FileReader.new
     merchants      = reader.read(File.expand_path("./data/merchants.csv"))
     customers      = reader.read(File.expand_path("./data/customers.csv"))

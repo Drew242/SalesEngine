@@ -1,4 +1,5 @@
 class Items
+
   attr_reader :id,
               :name,
               :description,

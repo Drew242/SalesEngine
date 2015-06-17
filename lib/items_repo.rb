@@ -25,5 +25,4 @@ class ItemsRepository
       end
     end
   end
-
 end
