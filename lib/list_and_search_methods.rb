@@ -7,6 +7,7 @@ module ListSearch
     instances.shuffle.first
   end
 
+
   def find_by_id(id)
 
     instances.each do |instance|
