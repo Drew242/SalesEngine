@@ -7,10 +7,30 @@ module ListSearch
     instances.shuffle.first
   end
 
+  def find_by_name(name)
+
+    instances.each do |instance|
+      if instance.name.include?(name)
+        return  instance
+      end
+    end
+
+  end
+
   def find_by_first_name(first_name)
 
     instances.each do |instance|
-      if instance.name.include?(first_name)
+      if instance.first_name.include?(first_name)
+        return  instance
+      end
+    end
+
+  end
+
+  def find_by_last_name(last_name)
+
+    instances.each do |instance|
+      if instance.last_name.include?(last_name)
         return  instance
       end
     end
@@ -28,7 +48,6 @@ module ListSearch
   end
 
   def find_by_created_at(date)
-    matches = []
     instances.each do |instance|
       if instance.created.include?(date)
         return instance
@@ -46,11 +65,35 @@ module ListSearch
     end
   end
 
+  def find_all_by_name(name)
+
+    result =[]
+    instances.each do |instance|
+      if instance.name.include?(name)
+        result << instance
+      end
+    end
+    return result
+
+  end
+
   def find_all_by_first_name(first_name)
 
     result =[]
     instances.each do |instance|
       if instance.name.include?(first_name)
+        result << instance
+      end
+    end
+    return result
+
+  end
+
+  def find_all_by_last_name(last_name)
+
+    result =[]
+    instances.each do |instance|
+      if instance.last_name.include?(last_name)
         result << instance
       end
     end

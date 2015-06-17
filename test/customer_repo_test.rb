@@ -75,11 +75,11 @@ class CustomerRepoTest < Minitest::Test
   end
 
   def test_it_can_find_an_instance_based_off_updated_at
-    data = FileReader.new.read("./test/fixture.csv")
+    data = FileReader.new.read("./test/customer_fixture.csv")
     repo = CustomerRepository.new(data, "sales_engine")
     customers = repo.manage
     result = repo.find_by_updated_at("2012-03-27 14:54:10 UTC")
-    assert_equal "6", result.id
+    assert_equal "2", result.id
   end
 
 end

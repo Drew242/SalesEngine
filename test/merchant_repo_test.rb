@@ -46,7 +46,7 @@ class MerchantRepoTest < Minitest::Test
     data = FileReader.new.read("./test/fixture.csv")
     repo = MerchantRepository.new(data, "sales_engine")
     merchants = repo.manage
-    result = repo.find_by_first_name("Klein")
+    result = repo.find_by_name("Klein")
     assert_equal "2", result.id
   end
 
