@@ -108,4 +108,13 @@ class MerchantRepoTest < Minitest::Test
     assert_equal 5, result.size
   end
 
+  def test_it_can_move_instances_up_to_its_sales_engine
+    engine = Minitest::Mock.new
+    repo = MerchantRepository.new([{id: 2, name: "Joe"}, {id: 1, name: "Jim"}], engine)
+    engine.expect(:take_merchant, [], [2])
+    repo.pass(2)
+    engine.verify
+  end
+
+
 end

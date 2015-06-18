@@ -1,11 +1,12 @@
+require_relative '../lib/merchant_repo'
+
 class Merchant
   attr_reader :id, :name, :created, :updated
-  def initialize(id,name,created_at,updated_at, repo)
-    @id      = id
-    #refactor parser into merchant
-    @name    = name
-    @created = created_at
-    @updated = updated_at
+  def initialize(data, repo)
+    @id      = data[:id]
+    @name    = data[:name]
+    @created = data[:created_at]
+    @updated = data[:updated_at]
     @repo    = repo
   end
 
@@ -16,4 +17,9 @@ class Merchant
   def to_s
     "Merchant #{id}"
   end
+
+  def items
+    @repo.pass(id)
+  end
+
 end

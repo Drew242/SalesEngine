@@ -55,7 +55,6 @@ class ItemsRepoTest < Minitest::Test
     assert_equal "Item Autem Minima", result.name
   end
 
-
   def test_it_can_find_an_instance_based_off_of_description
     data = FileReader.new.read(@file)
     repo = ItemsRepository.new(data, "sales_engine")

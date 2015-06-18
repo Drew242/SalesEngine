@@ -7,16 +7,14 @@ class InvoiceItem
               :created,
               :updated
 
-  def initialize(id,item_id,invoice_id,
-                quantity,unit_price,
-                created_at,updated_at, repo)
-    @id          = id
-    @item_id     = item_id
-    @invoice_id  = invoice_id
-    @quantity    = quantity
-    @price       = unit_price
-    @created     = created_at
-    @updated     = updated_at
+  def initialize(data, repo)
+    @id          = data[:id]
+    @item_id     = data[:item_id]
+    @invoice_id  = data[:invoice_id]
+    @quantity    = data[:quantity]
+    @price       = data[:unit_price]
+    @created     = data[:created_at]
+    @updated     = data[:updated_at]
     @repo        = repo
   end
 

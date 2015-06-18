@@ -1,7 +1,8 @@
-require_relative '../lib/merchant_parser'
+require_relative '../lib/merchant'
 require_relative '../lib/list_and_search_methods'
+require_relative '../lib/sales_engine'
 
-class MerchantRepository
+class MerchantRepository < SalesEngine
   include ListSearch
   attr_reader :data, :sales_engine, :instances
   def initialize(data, sales_engine)
@@ -11,10 +12,13 @@ class MerchantRepository
   end
 
   def manage
-    parser = MerchantParser.new(self)
     return data.map do |line|
-      parser.convert(line)
+      Merchant.new(line, self)
     end
+  end
+
+  def pass(instance)
+    @sales_engine.take_merchant(instance)
   end
 
 end

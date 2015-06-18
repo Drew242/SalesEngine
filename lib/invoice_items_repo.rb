@@ -1,5 +1,5 @@
 require_relative '../lib/list_and_search_methods'
-require_relative '../lib/invoice_items_parser'
+require_relative '../lib/invoice_item'
 class InvoiceItemsRepository
   include ListSearch
   attr_reader :data, :sales_engine, :instances
@@ -10,9 +10,8 @@ class InvoiceItemsRepository
   end
 
   def manage
-    parser = InvoiceItemsParser.new(self)
     return data.map do |line|
-      parser.convert(line)
+      InvoiceItem.new(line, self)
     end
   end
 

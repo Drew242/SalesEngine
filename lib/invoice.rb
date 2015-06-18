@@ -7,13 +7,13 @@ class Invoice
               :updated,
               :repo
 
-  def initialize(id,customer_id,merchant_id,status,created_at,updated_at, repo)
-    @id          = id
-    @customer_id = customer_id
-    @merchant_id = merchant_id
-    @status      = status
-    @created     = created_at
-    @updated     = updated_at
+  def initialize(data, repo)
+    @id          = data[:id]
+    @customer_id = data[:customer_id]
+    @merchant_id = data[:merchant_id]
+    @status      = data[:status]
+    @created     = data[:created_at]
+    @updated     = data[:updated_at]
     @repo        = repo
   end
 

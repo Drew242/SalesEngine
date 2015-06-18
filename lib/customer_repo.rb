@@ -1,5 +1,5 @@
 require_relative '../lib/list_and_search_methods'
-require_relative '../lib/customer_parser'
+require_relative '../lib/customer'
 class CustomerRepository
   include ListSearch
   attr_reader :data, :sales_engine, :instances
@@ -10,9 +10,8 @@ class CustomerRepository
   end
 
   def manage
-    parser = CustomerParser.new(self)
     return data.map do |line|
-      parser.convert(line)
+      Customer.new(line, self)
     end
   end
 

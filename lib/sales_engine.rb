@@ -1,7 +1,7 @@
 require_relative '../lib/file_reader'
 require_relative '../lib/merchant_repo'
 require_relative '../lib/customer_repo'
-require_relative '../lib/transactions_repo'
+require_relative '../lib/transaction_repo'
 require_relative '../lib/invoice_repo'
 require_relative '../lib/invoice_items_repo'
 require_relative '../lib/items_repo'
@@ -10,7 +10,7 @@ require 'csv'
 class SalesEngine
 
 
-  def startup(data = get_data())
+  def startup()
     reader         = FileReader.new
     merchants      = reader.read(File.expand_path("./data/merchants.csv"))
     customers      = reader.read(File.expand_path("./data/customers.csv"))
@@ -26,7 +26,13 @@ class SalesEngine
     @items_repo         = ItemsRepo.new(items, self)
   end
 
+  def take_merchant(instance)
+    @items_repo.find_all_by_merchant_id(instance)
+  end
+
 
 end
 
-SalesEngine.new.startup
+if __FILE__ == $0
+  SalesEngine.new.startup
+end
