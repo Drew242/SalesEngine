@@ -35,11 +35,6 @@ class SalesEngine
     @invoice_repo.find_all_by_merchant_id(instance)
   end
 
-  def find_all_invoices_by_item_id(instance)
-    result = @invoice_items_repo.find_by_item_id(instance)
-    @invoice_repo.find_by_id(instance)
-  end
-
   def find_all_transactions_by_invoice_id(instance)
     @transaction_repo.find_all_by_invoice_id(instance)
   end
