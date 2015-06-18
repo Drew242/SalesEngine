@@ -21,7 +21,7 @@ class CustomerTest < Minitest::Test
     customer = Customer.new({id:"42", name:"Jim",
                             created_at: "date1",
                             updated_at: "date2"}, "repo")
-    assert_equal "42", customer.id
+    assert_equal 42, customer.id
   end
 
   def test_it_has_a_created_at_date

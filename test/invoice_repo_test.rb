@@ -51,7 +51,7 @@ class InvoiceRepoTest < Minitest::Test
   def test_it_can_find_an_instance_based_off_of_merchant_id
     data = FileReader.new.read(@file)
     repo = InvoiceRepository.new(data, "sales_engine")
-    result = repo.find_by_merchant_id("2")
+    result = repo.find_by_merchant_id("26")
     assert_equal "1", result.customer_id
   end
 

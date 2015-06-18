@@ -9,7 +9,7 @@ module ListSearch
 
   def find_by_id(id)
     instances.select do |instance|
-      if instance.id.downcase.include?(id.downcase)
+      if instance.id == id
         return instance
       end
     end
@@ -17,7 +17,7 @@ module ListSearch
 
   def find_by_name(name)
     instances.select do |instance|
-      if instance.name.downcase.include?(name.downcase)
+      if instance.name.downcase == name.downcase
         return instance
       end
     end
@@ -27,7 +27,7 @@ module ListSearch
   def find_all_by_name(name)
     result =[]
     instances.select do |instance|
-      if instance.name.downcase.include?(name.downcase)
+      if instance.name.downcase == name.downcase
         result << instance
       end
     end
@@ -37,7 +37,7 @@ module ListSearch
 
   def find_by_created_at(date)
     instances.select do |instance|
-      if instance.created.downcase.include?(date.downcase)
+      if instance.created == date
         return instance
       end
     end
@@ -45,7 +45,7 @@ module ListSearch
 
   def find_by_updated_at(date)
     instances.select do |instance|
-      if instance.updated.downcase.include?(date.downcase)
+      if instance.updated == date
         return instance
       end
     end
@@ -54,7 +54,7 @@ module ListSearch
   def find_all_by_id(id)
     result =[]
     instances.select do |instance|
-      if instance.id.downcase.include?(id.downcase)
+      if instance.id == id
         result << instance
       end
     end
@@ -65,7 +65,7 @@ module ListSearch
 
     result =[]
     instances.select do |instance|
-      if instance.created.downcase.include?(created_at.downcase)
+      if instance.created == created_at
         result << instance
       end
     end
@@ -75,7 +75,7 @@ module ListSearch
   def find_all_by_updated_at(updated_at)
     result =[]
     instances.select do |instance|
-      if instance.updated.downcase.include?(updated_at.downcase)
+      if instance.updated == updated_at
         result << instance
       end
     end
@@ -85,7 +85,7 @@ module ListSearch
   def find_all_by_unit_price(price)
     result =[]
     instances.select do |instance|
-      if instance.price.include?(price)
+      if instance.price == price
         result << instance
       end
     end
@@ -94,15 +94,25 @@ module ListSearch
 
   def find_by_merchant_id(id)
     instances.select do |instance|
-      if instance.merchant_id.downcase.include?(id.downcase)
+      if instance.merchant_id == id
         return instance
       end
     end
   end
 
+  def find_all_by_merchant_id(id)
+    result =[]
+    instances.select do |instance|
+      if instance.merchant_id == id
+        result << instance
+      end
+    end
+    return result
+  end
+
   def find_by_customer_id(id)
     instances.select do |instance|
-      if instance.customer_id.downcase.include?(id.downcase)
+      if instance.customer_id == id
         return instance
       end
     end
@@ -110,7 +120,7 @@ module ListSearch
 
   def find_by_unit_price(price)
     instances.select do |instance|
-      if instance.price.include?(price)
+      if instance.price == price
         return instance
       end
     end

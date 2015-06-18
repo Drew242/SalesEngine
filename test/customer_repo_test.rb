@@ -45,20 +45,20 @@ class CustomerRepoTest < Minitest::Test
     data = FileReader.new.read(@file)
     repo = CustomerRepository.new(data, "sales_engine")
     result = repo.find_by_first_name("MarIah")
-    assert_equal "3", result.id
+    assert_equal 3, result.id
   end
 
   def test_it_can_find_an_instance_based_off_of_last_name
     data = FileReader.new.read(@file)
     repo = CustomerRepository.new(data, "sales_engine")
     result = repo.find_by_last_name("BrAun")
-    assert_equal "4", result.id
+    assert_equal 4, result.id
   end
 
   def test_it_can_find_an_instance_based_off_of_id
     data = FileReader.new.read(@file)
     repo = CustomerRepository.new(data, "sales_engine")
-    result = repo.find_by_id("2")
+    result = repo.find_by_id(2)
     assert_equal "Cecelia", result.first_name
   end
 
@@ -66,14 +66,14 @@ class CustomerRepoTest < Minitest::Test
     data = FileReader.new.read(@file)
     repo = CustomerRepository.new(data, "sales_engine")
     result = repo.find_by_created_at("2012-03-27 14:54:09 UTC")
-    assert_equal "1", result.id
+    assert_equal 1, result.id
   end
 
   def test_it_can_find_an_instance_based_off_updated_at
     data = FileReader.new.read(@file)
     repo = CustomerRepository.new(data, "sales_engine")
     result = repo.find_by_updated_at("2012-03-27 14:54:10 UTC")
-    assert_equal "2", result.id
+    assert_equal 2, result.id
   end
 
 end

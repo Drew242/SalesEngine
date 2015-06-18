@@ -1,7 +1,7 @@
 class Customer
   attr_reader :id, :first_name, :last_name, :created, :updated
   def initialize(data, repo)
-    @id          = data[:id]
+    @id          = data[:id].to_i
     @first_name  = data[:first_name]
     @last_name   = data[:last_name]
     @created     = data[:created_at]

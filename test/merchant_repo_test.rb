@@ -1,4 +1,4 @@
-require 'minitest/autorun'
+  require 'minitest/autorun'
 require 'csv'
 require 'minitest/pride'
 require_relative '../lib/merchant_repo'
@@ -45,7 +45,7 @@ class MerchantRepoTest < Minitest::Test
   def test_it_can_find_an_instance_based_off_of_name
     data = FileReader.new.read(@file)
     repo = MerchantRepository.new(data, "sales_engine")
-    result = repo.find_by_name("klEin")
+    result = repo.find_by_name("klein, REmpel and Jones")
     assert_equal "2", result.id
   end
 
@@ -66,14 +66,14 @@ class MerchantRepoTest < Minitest::Test
   def test_it_can_find_an_instance_based_off_updated_at
     data = FileReader.new.read(@file)
     repo = MerchantRepository.new(data, "sales_engine")
-    result = repo.find_by_updated_at("2012-03-27 16:12:25 UtC")
+    result = repo.find_by_updated_at("2012-03-27 16:12:25 UTC")
     assert_equal "6", result.id
   end
 
   def test_it_can_find_all_instances_based_off_of_first_name
     data = FileReader.new.read(@file)
     repo = MerchantRepository.new(data, "sales_engine")
-    result = repo.find_all_by_name("WilliamSon")
+    result = repo.find_all_by_name("williamsoN Group")
     assert_equal 2, result.size
   end
 
@@ -81,7 +81,7 @@ class MerchantRepoTest < Minitest::Test
   def test_it_can_find_all_instances_based_off_of_name
     data = FileReader.new.read(@file)
     repo = MerchantRepository.new(data, "sales_engine")
-    result = repo.find_all_by_name("KleIn")
+    result = repo.find_all_by_name("klein, Rempel and Jones")
     assert_equal 1, result.count
 
   end
@@ -97,7 +97,7 @@ class MerchantRepoTest < Minitest::Test
   def test_it_can_find_all_instances_based_off_of_created_at
     data = FileReader.new.read(@file)
     repo = MerchantRepository.new(data, "sales_engine")
-    result = repo.find_all_by_created_at("2012-03-27 14:53:59")
+    result = repo.find_all_by_created_at("2012-03-27 14:53:59 UTC")
     assert_equal 6, result.size
   end
 
