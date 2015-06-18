@@ -30,7 +30,7 @@ class TransactionRepoTest < Minitest::Test
     repo = TransactionRepository.new(data, "sales_engine")
     result = repo.all
     result.map do |transaction|
-      assert_equal Transactions, transaction.class
+      assert_equal Transaction, transaction.class
     end
   end
 

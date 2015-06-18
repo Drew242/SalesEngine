@@ -1,5 +1,5 @@
 require_relative '../lib/list_and_search_methods'
-require_relative '../lib/item_parser'
+require_relative '../lib/item'
 
 class ItemsRepository
   include ListSearch
@@ -12,9 +12,8 @@ class ItemsRepository
   end
 
   def manage
-    parser = ItemParser.new(self)
     return data.map do |line|
-      parser.convert(line)
+      Item.new(line, self)
     end
   end
 

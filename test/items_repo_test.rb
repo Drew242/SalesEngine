@@ -27,14 +27,13 @@ class ItemsRepoTest < Minitest::Test
     repo = ItemsRepository.new(data, "sales_engine")
     result = repo.all
     result.map do |items|
-      assert_equal Items, items.class
+      assert_equal Item, items.class
     end
   end
 
   def test_it_can_find_random
     data = FileReader.new.read(@file)
     repo = ItemsRepository.new(data, "sales_engine")
-
     random = repo.random
     items = repo.instances
     items.delete(random)

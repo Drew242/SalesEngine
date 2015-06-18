@@ -1,5 +1,5 @@
 require_relative '../lib/list_and_search_methods'
-require_relative '../lib/transaction_parser'
+require_relative '../lib/transaction'
 class TransactionRepository
   include ListSearch
   attr_reader :data, :sales_engine, :instances
@@ -9,9 +9,8 @@ class TransactionRepository
     @instances = manage
   end
   def manage
-    parser = TransactionParser.new(self)
     return data.map do |line|
-      parser.convert(line)
+      Transaction.new(line, self)
     end
   end
 
