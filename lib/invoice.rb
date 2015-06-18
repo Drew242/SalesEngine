@@ -17,5 +17,24 @@ class Invoice
     @repo        = repo
   end
 
+  def transactions
+    @repo.find_all_transactions_by_invoice_id(id)
+  end
+
+  def invoice_items
+    @repo.find_all_invoice_items_by_invoice_id(id)
+  end
+
+  def items
+    @repo.find_all_items_by_invoice_id(id)
+  end
+
+  def customer
+    @repo.find_a_customer_by_invoice_id(customer_id)
+  end
+
+  def merchant
+    @repo.find_a_merchant_by_invoice_id(merchant_id)
+  end
 
 end

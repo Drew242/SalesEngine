@@ -1,4 +1,5 @@
 require_relative '../lib/merchant_repo'
+require 'bigdecimal'
 
 class Merchant
   attr_reader :id, :name, :created, :updated
@@ -19,7 +20,11 @@ class Merchant
   end
 
   def items
-    @repo.pass(id)
+    @repo.find_all_items_by_merchant_id(id)
+  end
+
+  def invoices
+    @repo.find_all_invoices_by_merchant_id(id)
   end
 
 end

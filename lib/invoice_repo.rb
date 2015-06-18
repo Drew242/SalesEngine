@@ -24,4 +24,25 @@ class InvoiceRepository
       end
     end
   end
+
+  def find_all_invoice_items_by_invoice_id(id)
+    @sales_engine.find_all_invoice_items_by_invoice_id(id)
+  end
+
+  def find_all_transactions_by_invoice_id(id)
+    @sales_engine.find_all_transactions_by_invoice_id(id)
+  end
+
+  def find_all_items_by_invoice_id(id)
+    @sales_engine.find_all_items_by_invoice_id(id)
+  end
+
+  def find_a_customer_by_invoice_id(id)
+    @sales_engine.find_a_customer_by_invoice_id(id)
+  end
+
+  def find_a_merchant_by_invoice_id(id)
+    @sales_engine.find_a_merchant_by_invoice_id(id)
+  end
+
 end

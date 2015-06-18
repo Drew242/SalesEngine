@@ -1,5 +1,4 @@
-require 'minitest/autorun'
-require 'minitest/pride'
+require_relative '../test/test_helper'
 require_relative '../lib/invoice'
 
 class InvoiceTest < Minitest::Test
@@ -49,6 +48,46 @@ class InvoiceTest < Minitest::Test
     created_at:"2012-03-25 09:54:09 UTC",
     updated_at:"2012-03-25 09:54:09 UTC"}, "repo")
     assert_equal "2012-03-25 09:54:09 UTC", invoice.updated
+  end
+
+  def test_it_can_move_instances_up_to_its_repo_for_transactions
+    repo = Minitest::Mock.new
+    invoice = Invoice.new({id: 2, name: "Joe"}, repo)
+    repo.expect(:find_all_transactions_by_invoice_id, [], [invoice.id])
+    invoice.transactions
+    repo.verify
+  end
+
+  def test_it_can_move_instances_up_to_its_repo_for_invoice_items
+    repo = Minitest::Mock.new
+    invoice = Invoice.new({id: 2, name: "Joe"}, repo)
+    repo.expect(:find_all_invoice_items_by_invoice_id, [], [invoice.id])
+    invoice.invoice_items
+    repo.verify
+  end
+
+  def test_it_can_move_instances_up_to_its_repo_for_items
+    repo = Minitest::Mock.new
+    invoice = Invoice.new({id: 2, name: "Joe"}, repo)
+    repo.expect(:find_all_items_by_invoice_id, [], [invoice.id])
+    invoice.items
+    repo.verify
+  end
+
+  def test_it_can_move_instances_up_to_its_repo_for_a_customer
+    repo = Minitest::Mock.new
+    invoice = Invoice.new({id: 2, name: "Joe", customer_id: "2"}, repo)
+    repo.expect(:find_a_customer_by_invoice_id, [], [invoice.customer_id])
+    invoice.customer
+    repo.verify
+  end
+
+  def test_it_can_move_instances_up_to_its_repo_for_a_merchant
+    repo = Minitest::Mock.new
+    invoice = Invoice.new({id: 2, name: "Joe", merchant_id: "5"}, repo)
+    repo.expect(:find_a_merchant_by_invoice_id, [], [invoice.merchant_id])
+    invoice.merchant
+    repo.verify
   end
 
 end

@@ -1,8 +1,5 @@
-require 'minitest/autorun'
-require 'csv'
-require 'minitest/pride'
-require_relative '../lib/invoice_repo'
-require_relative '../lib/file_reader'
+require_relative '../test/test_helper'
+
 
 class InvoiceRepoTest < Minitest::Test
   def setup
@@ -104,6 +101,46 @@ class InvoiceRepoTest < Minitest::Test
     repo = InvoiceRepository.new(data, "sales_engine")
     result = repo.find_all_by_updated_at("2012-03-12 05:54:09 UTC")
     assert_equal 2, result.size
+  end
+
+  def test_it_can_move_instances_up_to_its_sales_engine_for_invoice_items
+    engine = Minitest::Mock.new
+    invoice_repo = InvoiceRepository.new([{id: 2, name: "Joe"}], engine)
+    engine.expect(:find_all_invoice_items_by_invoice_id, [], [2])
+    invoice_repo.find_all_invoice_items_by_invoice_id(2)
+    engine.verify
+  end
+
+  def test_it_can_move_instances_up_to_its_sales_engine_for_transactions
+    engine = Minitest::Mock.new
+    invoice_repo = InvoiceRepository.new([{id: 2, name: "Joe"}], engine)
+    engine.expect(:find_all_transactions_by_invoice_id, [], [2])
+    invoice_repo.find_all_transactions_by_invoice_id(2)
+    engine.verify
+  end
+
+  def test_it_can_move_instances_up_to_its_sales_engine_for_items
+    engine = Minitest::Mock.new
+    invoice_repo = InvoiceRepository.new([{id: 2, name: "Joe"}], engine)
+    engine.expect(:find_all_items_by_invoice_id, [], [2])
+    invoice_repo.find_all_items_by_invoice_id(2)
+    engine.verify
+  end
+
+  def test_it_can_move_instances_up_to_its_sales_engine_for_a_customer
+    engine = Minitest::Mock.new
+    invoice_repo = InvoiceRepository.new([{id: 2, name: "Joe"}], engine)
+    engine.expect(:find_a_customer_by_invoice_id, [], [2])
+    invoice_repo.find_a_customer_by_invoice_id(2)
+    engine.verify
+  end
+
+  def test_it_can_move_instances_up_to_its_sales_engine_for_a_merchant
+    engine = Minitest::Mock.new
+    invoice_repo = InvoiceRepository.new([{id: 2, name: "Joe"}], engine)
+    engine.expect(:find_a_merchant_by_invoice_id, [], [2])
+    invoice_repo.find_a_merchant_by_invoice_id(2)
+    engine.verify
   end
 
 end

@@ -1,6 +1,7 @@
 require_relative '../lib/merchant'
 require_relative '../lib/list_and_search_methods'
 require_relative '../lib/sales_engine'
+require 'bigdecimal'
 
 class MerchantRepository < SalesEngine
   include ListSearch
@@ -17,8 +18,12 @@ class MerchantRepository < SalesEngine
     end
   end
 
-  def pass(instance)
-    @sales_engine.take_merchant(instance)
+  def find_all_items_by_merchant_id(instance)
+    @sales_engine.find_all_items_by_merchant_id(instance)
+  end
+
+  def find_all_invoices_by_merchant_id(instance)
+    @sales_engine.find_all_invoices_by_merchant_id(instance)
   end
 
 end

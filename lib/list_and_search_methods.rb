@@ -118,6 +118,24 @@ module ListSearch
     end
   end
 
+  def find_by_invoice_id(id)
+    instances.select do |instance|
+      if instance.invoice_id == id
+        return instance
+      end
+    end
+  end
+
+  def find_all_by_invoice_id(id)
+    total = []
+    instances.map do |instance|
+      if instance.invoice_id == id
+        total << instance
+      end
+    end
+    return total
+  end
+
   def find_by_unit_price(price)
     instances.select do |instance|
       if instance.price == price

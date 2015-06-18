@@ -23,22 +23,23 @@ class InvoiceItemsRepository
     end
   end
 
-  def find_by_invoice_id(id)
+  def find_by_item_id(id)
     instances.select do |instance|
-      if instance.invoice_id == id
+      if instance.item_id == id
         return instance
       end
     end
   end
 
-  def find_all_by_invoice_id(id)
-    result = []
+  def find_all_by_item_id(id)
+    total = []
     instances.select do |instance|
-      if instance.invoice_id == id
-        result << instance
+      if instance.item_id == id
+        total << instance
       end
     end
   end
+
 
   def find_all_by_quantity(quantity)
     result = []

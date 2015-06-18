@@ -1,9 +1,4 @@
-  require 'minitest/autorun'
-require 'csv'
-require 'minitest/pride'
-require_relative '../lib/merchant_repo'
-require_relative '../lib/file_reader'
-
+require_relative '../test/test_helper'
 
 
 class MerchantRepoTest < Minitest::Test
@@ -108,11 +103,21 @@ class MerchantRepoTest < Minitest::Test
     assert_equal 5, result.size
   end
 
-  def test_it_can_move_instances_up_to_its_sales_engine
+  def test_it_can_move_instances_up_to_its_sales_engine_for_items_search
     engine = Minitest::Mock.new
-    repo = MerchantRepository.new([{id: 2, name: "Joe"}, {id: 1, name: "Jim"}], engine)
-    engine.expect(:take_merchant, [], [2])
-    repo.pass(2)
+    repo = MerchantRepository.new([{id: 2, name: "Joe"},
+                                  {id: 1, name: "Jim"}], engine)
+    engine.expect(:find_all_items_by_merchant_id, [], [2])
+    repo.find_all_items_by_merchant_id(2)
+    engine.verify
+  end
+
+  def test_it_can_move_instances_up_to_its_sales_engine_for_invoices_search
+    engine = Minitest::Mock.new
+    repo = MerchantRepository.new([{id: 2, name: "Joe"},
+                                  {id: 1, name: "Jim"}] , engine)
+    engine.expect(:find_all_invoices_by_merchant_id, [], [2])
+    repo.find_all_invoices_by_merchant_id(2)
     engine.verify
   end
 

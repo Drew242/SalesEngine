@@ -1,8 +1,5 @@
-require 'minitest/autorun'
-require 'csv'
-require 'minitest/pride'
-require_relative '../lib/invoice_items_repo'
-require_relative '../lib/file_reader'
+require_relative '../test/test_helper'
+
 
 class InvoiceItemsRepoTest < Minitest::Test
   def setup

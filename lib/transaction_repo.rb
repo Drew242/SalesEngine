@@ -1,8 +1,11 @@
 require_relative '../lib/list_and_search_methods'
 require_relative '../lib/transaction'
+require 'bigdecimal'
+
 class TransactionRepository
   include ListSearch
   attr_reader :data, :sales_engine, :instances
+
   def initialize(data, sales_engine)
     @data         = data
     @sales_engine = sales_engine

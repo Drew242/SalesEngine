@@ -1,9 +1,4 @@
-require 'minitest/autorun'
-require 'csv'
-require 'minitest/pride'
-require_relative '../lib/transaction_repo'
-require_relative '../lib/file_reader'
-
+require_relative '../test/test_helper'
 
 
 class TransactionRepoTest < Minitest::Test
