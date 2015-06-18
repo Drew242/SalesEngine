@@ -3,7 +3,7 @@ require_relative '../lib/merchant_repo'
 class Merchant
   attr_reader :id, :name, :created, :updated
   def initialize(data, repo)
-    @id      = data[:id]
+    @id      = data[:id].to_i
     @name    = data[:name]
     @created = data[:created_at]
     @updated = data[:updated_at]

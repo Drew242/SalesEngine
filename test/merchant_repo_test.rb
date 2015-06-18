@@ -46,13 +46,13 @@ class MerchantRepoTest < Minitest::Test
     data = FileReader.new.read(@file)
     repo = MerchantRepository.new(data, "sales_engine")
     result = repo.find_by_name("klein, REmpel and Jones")
-    assert_equal "2", result.id
+    assert_equal 2, result.id
   end
 
   def test_it_can_find_an_instance_based_off_of_id
     data = FileReader.new.read(@file)
     repo = MerchantRepository.new(data, "sales_engine")
-    result = repo.find_by_id("2")
+    result = repo.find_by_id(2)
     assert_equal "Klein, Rempel and Jones", result.name
   end
 
@@ -60,14 +60,14 @@ class MerchantRepoTest < Minitest::Test
     data = FileReader.new.read(@file)
     repo = MerchantRepository.new(data, "sales_engine")
     result = repo.find_by_created_at("2012-03-27 14:53:59 UTC")
-    assert_equal "1", result.id
+    assert_equal 1, result.id
   end
 
   def test_it_can_find_an_instance_based_off_updated_at
     data = FileReader.new.read(@file)
     repo = MerchantRepository.new(data, "sales_engine")
     result = repo.find_by_updated_at("2012-03-27 16:12:25 UTC")
-    assert_equal "6", result.id
+    assert_equal 6, result.id
   end
 
   def test_it_can_find_all_instances_based_off_of_first_name
@@ -89,7 +89,7 @@ class MerchantRepoTest < Minitest::Test
   def test_it_can_find_all_instances_based_off_of_id
     data = FileReader.new.read(@file)
     repo = MerchantRepository.new(data, "sales_engine")
-    result = repo.find_all_by_id("2")
+    result = repo.find_all_by_id(2)
     assert_equal "Klein, Rempel and Jones", result[0].name
 
   end

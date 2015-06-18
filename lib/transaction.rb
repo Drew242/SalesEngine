@@ -10,11 +10,11 @@ class Transaction
               :result
 
   def initialize(data, repo)
-    @id          = data[:id]
-    @invoice_id  = data[:invoice_id]
+    @id          = data[:id].to_i
+    @invoice_id  = data[:invoice_id].to_i
     @cc_num      = data[:credit_card_number]
     @cc_ex       = data[:credit_card_expiration_date]
-    @merchant_id = data[:merchant_id]
+    @merchant_id = data[:merchant_id].to_i
     @created     = data[:created_at]
     @updated     = data[:updated_at]
     @result      = data[:result]

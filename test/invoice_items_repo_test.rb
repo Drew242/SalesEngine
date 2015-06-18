@@ -46,23 +46,23 @@ class InvoiceItemsRepoTest < Minitest::Test
     data = FileReader.new.read(@file)
     repo = InvoiceItemsRepository.new(data, "sales_engine")
     invoice_items = repo.manage
-    result = repo.find_by_id("2")
-    assert_equal "9", result.quantity
+    result = repo.find_by_id(2)
+    assert_equal 9, result.quantity
   end
 
   def test_it_can_find_an_instance_based_off_of_quantity
     data = FileReader.new.read(@file)
     repo = InvoiceItemsRepository.new(data, "sales_engine")
     invoice_items = repo.manage
-    result = repo.find_by_quantity("9")
-    assert_equal "2", result.id
+    result = repo.find_by_quantity(9)
+    assert_equal 2, result.id
   end
 
   def test_it_can_find_all_instances_based_off_of_quantity
     data = FileReader.new.read(@file)
     repo = InvoiceItemsRepository.new(data, "sales_engine")
     invoice_items = repo.manage
-    result = repo.find_all_by_quantity("5")
+    result = repo.find_all_by_quantity(5)
     assert_equal 2 , result.size
   end
 
@@ -79,7 +79,7 @@ class InvoiceItemsRepoTest < Minitest::Test
     repo = InvoiceItemsRepository.new(data, "sales_engine")
     invoice_items = repo.manage
     result = repo.find_by_unit_price("23324")
-    assert_equal "528" , result.item_id
+    assert_equal 528 , result.item_id
   end
 
 
@@ -87,15 +87,15 @@ class InvoiceItemsRepoTest < Minitest::Test
     data = FileReader.new.read(@file)
     repo = InvoiceItemsRepository.new(data, "sales_engine")
     invoice_items = repo.manage
-    result = repo.find_by_invoice_id("2")
-    assert_equal "9" , result.quantity
+    result = repo.find_by_invoice_id(2)
+    assert_equal 9 , result.quantity
   end
 
   def test_it_can_find_all_instances_based_off_of_invoice_id
     data = FileReader.new.read(@file)
     repo = InvoiceItemsRepository.new(data, "sales_engine")
     invoice_items = repo.manage
-    result = repo.find_all_by_invoice_id("1")
+    result = repo.find_all_by_invoice_id(1)
     assert_equal 5 , result.size
   end
 
@@ -104,7 +104,7 @@ class InvoiceItemsRepoTest < Minitest::Test
     repo = InvoiceItemsRepository.new(data, "sales_engine")
     invoice_items = repo.manage
     result = repo.find_by_created_at("2012-03-27 14:54:09 UTC")
-    assert_equal "1", result.id
+    assert_equal 1, result.id
   end
 
   def test_it_can_find_an_instance_based_off_updated_at
@@ -112,7 +112,7 @@ class InvoiceItemsRepoTest < Minitest::Test
     repo = InvoiceItemsRepository.new(data, "sales_engine")
     invoice_items = repo.manage
     result = repo.find_by_updated_at("2012-03-27 14:54:09 UTC")
-    assert_equal "1", result.id
+    assert_equal 1, result.id
   end
 
 
@@ -120,8 +120,8 @@ class InvoiceItemsRepoTest < Minitest::Test
     data = FileReader.new.read(@file)
     repo = InvoiceItemsRepository.new(data, "sales_engine")
     invoices_items = repo.manage
-    result = repo.find_all_by_id("2")
-    assert_equal "9", result[0].quantity
+    result = repo.find_all_by_id(2)
+    assert_equal 9, result[0].quantity
 
   end
 

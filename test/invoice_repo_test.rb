@@ -44,51 +44,51 @@ class InvoiceRepoTest < Minitest::Test
   def test_it_can_find_an_instance_based_off_of_id
     data = FileReader.new.read(@file)
     repo = InvoiceRepository.new(data, "sales_engine")
-    result = repo.find_by_id("2")
-    assert_equal "1", result.customer_id
+    result = repo.find_by_id(2)
+    assert_equal 1, result.customer_id
   end
 
   def test_it_can_find_an_instance_based_off_of_merchant_id
     data = FileReader.new.read(@file)
     repo = InvoiceRepository.new(data, "sales_engine")
-    result = repo.find_by_merchant_id("26")
-    assert_equal "1", result.customer_id
+    result = repo.find_by_merchant_id(26)
+    assert_equal 1, result.customer_id
   end
 
   def test_it_can_find_an_instance_based_off_of_customer_id
     data = FileReader.new.read(@file)
     repo = InvoiceRepository.new(data, "sales_engine")
-    result = repo.find_by_customer_id("1")
-    assert_equal "26", result.merchant_id
+    result = repo.find_by_customer_id(1)
+    assert_equal 26, result.merchant_id
   end
 
   def test_it_can_find_an_instance_based_off_of_status
     data = FileReader.new.read(@file)
     repo = InvoiceRepository.new(data, "sales_engine")
     result = repo.find_by_status("ShiPped")
-    assert_equal "1", result.customer_id
+    assert_equal 1, result.customer_id
   end
 
   def test_it_can_find_an_instance_based_off_of_created_at
     data = FileReader.new.read(@file)
     repo = InvoiceRepository.new(data, "sales_engine")
     result = repo.find_by_created_at("2012-03-25 09:54:09 UTC")
-    assert_equal "1", result.id
+    assert_equal 1, result.id
   end
 
   def test_it_can_find_an_instance_based_off_updated_at
     data = FileReader.new.read(@file)
     repo = InvoiceRepository.new(data, "sales_engine")
     result = repo.find_by_updated_at("2012-03-12 05:54:09 UTC")
-    assert_equal "2", result.id
+    assert_equal 2, result.id
   end
 
 
   def test_it_can_find_all_instances_based_off_of_id
     data = FileReader.new.read(@file)
     repo = InvoiceRepository.new(data, "sales_engine")
-    result = repo.find_all_by_id("2")
-    assert_equal "1", result[0].customer_id
+    result = repo.find_all_by_id(2)
+    assert_equal 1, result[0].customer_id
 
   end
 

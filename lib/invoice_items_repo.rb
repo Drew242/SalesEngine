@@ -17,7 +17,7 @@ class InvoiceItemsRepository
 
   def find_by_quantity(quantity)
     instances.select do |instance|
-      if instance.quantity.include?(quantity)
+      if instance.quantity == quantity
         return instance
       end
     end
@@ -25,7 +25,7 @@ class InvoiceItemsRepository
 
   def find_by_invoice_id(id)
     instances.select do |instance|
-      if instance.invoice_id == (id)
+      if instance.invoice_id == id
         return instance
       end
     end
@@ -34,7 +34,7 @@ class InvoiceItemsRepository
   def find_all_by_invoice_id(id)
     result = []
     instances.select do |instance|
-      if instance.invoice_id == (id)
+      if instance.invoice_id == id
         result << instance
       end
     end
@@ -43,7 +43,7 @@ class InvoiceItemsRepository
   def find_all_by_quantity(quantity)
     result = []
     instances.select do |instance|
-      if instance.quantity.include?(quantity)
+      if instance.quantity == quantity
         result << instance
       end
     end

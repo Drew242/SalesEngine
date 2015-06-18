@@ -14,7 +14,7 @@ class ItemTest < Minitest::Test
     item = Item.new({id:"2", name:"Item_que", decription:"something",
                     unit_price:"one", merchant_id:"seven",
                     created_at:"date1", updated_at:"date2"}, "repo")
-    assert_equal "2", item.id
+    assert_equal 2, item.id
   end
 
   def test_it_has_a_description
@@ -26,16 +26,16 @@ class ItemTest < Minitest::Test
 
   def test_it_has_a_unit_price
     item = Item.new({id:"2", name:"Item_que", decription:"something",
-                    unit_price:"one", merchant_id:"seven",
+                    unit_price:"1", merchant_id:"seven",
                     created_at:"date1", updated_at:"date2"}, "repo")
-    assert_equal "one", item.price
+    assert_equal "1", item.price
   end
 
   def test_it_has_a_merchant_id
     item = Item.new({id:"2", name:"Item_que", decription:"something",
-                    unit_price:"one", merchant_id:"seven",
+                    unit_price:"one", merchant_id:"7",
                     created_at:"date1", updated_at:"date2"}, "repo")
-    assert_equal "seven", item.merchant_id
+    assert_equal 7, item.merchant_id
   end
 
   def test_it_has_a_created_at_date

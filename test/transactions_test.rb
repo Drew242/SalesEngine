@@ -8,7 +8,7 @@ class TransactionsTest < Minitest::Test
                                   credit_card_number:"4654405418249632",
                                   credit_card_expiration_data:"" ,result:"success",
                                    created_at:"date1", updated_at:"date2"}, "repo")
-    assert_equal "42", transaction.id
+    assert_equal 42, transaction.id
   end
 
   def test_it_has_an_invoice_id
@@ -16,7 +16,7 @@ class TransactionsTest < Minitest::Test
                                   credit_card_number:"4654405418249632",
                                   credit_card_expiration_data:"" ,result:"success",
                                    created_at:"date1", updated_at:"date2"}, "repo")
-    assert_equal "2", transaction.invoice_id
+    assert_equal 2, transaction.invoice_id
   end
 
   def test_it_has_a_created_at_date

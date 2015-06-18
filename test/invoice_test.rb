@@ -16,7 +16,7 @@ class InvoiceTest < Minitest::Test
     status:"shipped",
     created_at:"2012-03-25 09:54:09 UTC",
     updated_at:"2012-03-25 09:54:09 UTC"}, "repo")
-    assert_equal "67", invoice.customer_id
+    assert_equal 67, invoice.customer_id
   end
 
   def test_it_has_an_id
@@ -24,7 +24,7 @@ class InvoiceTest < Minitest::Test
     status:"shipped",
     created_at:"2012-03-25 09:54:09 UTC",
     updated_at:"2012-03-25 09:54:09 UTC"}, "repo")
-    assert_equal "4", invoice.id
+    assert_equal 4, invoice.id
   end
 
   def test_it_has_a_merchant_id
@@ -32,7 +32,7 @@ class InvoiceTest < Minitest::Test
     status:"shipped",
     created_at:"2012-03-25 09:54:09 UTC",
     updated_at:"2012-03-25 09:54:09 UTC"}, "repo")
-    assert_equal "5", invoice.merchant_id
+    assert_equal 5, invoice.merchant_id
   end
 
   def test_it_has_a_created_at_date
