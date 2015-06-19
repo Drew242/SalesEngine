@@ -26,4 +26,13 @@ class Item
   def to_s
     "Item #{id}"
   end
+
+  def invoice_items
+    @repo.find_invoice_items_by_item_id(id)
+  end
+
+  def merchant
+    @repo.find_merchant_by_merchant_id(merchant_id)
+  end
+
 end

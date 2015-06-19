@@ -24,4 +24,8 @@ class TransactionRepository
       end
     end
   end
+
+  def find_all_invoices_by_invoice_id(instance)
+    @sales_engine.find_all_invoices_by_invoice_id(instance)
+  end
 end

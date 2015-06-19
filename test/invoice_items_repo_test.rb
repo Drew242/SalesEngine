@@ -138,4 +138,12 @@ class InvoiceItemsRepoTest < Minitest::Test
     assert_equal 6, result.size
   end
 
+  def test_it_can_move_instances_up_to_its_sales_engine_for_items
+    engine = Minitest::Mock.new
+    repo = InvoiceItemsRepository.new([{id: 2, name: "Joe"}], engine)
+    engine.expect(:find_an_invoice_by_invoice_id, [], [2])
+    repo.find_an_invoice_by_invoice_id(2)
+    engine.verify
+  end
+
 end

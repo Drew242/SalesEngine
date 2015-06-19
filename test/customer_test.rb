@@ -37,4 +37,14 @@ class CustomerTest < Minitest::Test
     assert_equal "date2", customer.updated
   end
 
+  def test_it_can_move_instances_up_to_its_repository_for_invoices_method
+    repo = Minitest::Mock.new
+    customer = Customer.new({id:"42", name:"Jim",
+                              created_at: "date1",
+                              updated_at: "date2"}, repo)
+    repo.expect(:find_all_invoices_by_id, [], [customer.id])
+    customer.invoices
+    repo.verify
+  end
+
 end

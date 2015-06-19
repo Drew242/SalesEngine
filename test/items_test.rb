@@ -51,4 +51,24 @@ class ItemTest < Minitest::Test
     assert_equal "date2", item.updated
   end
 
+  def test_it_can_move_instances_up_to_its_repo_for_an_invoice
+    repo = Minitest::Mock.new
+    item = Item.new({id:"2", name:"Item_que", decription:"something",
+                    unit_price:"one", merchant_id:"7",
+                    created_at:"date1", updated_at:"date2"}, repo)
+    repo.expect(:find_invoice_items_by_item_id, [], [item.id])
+    item.invoice_items
+    repo.verify
+  end
+
+  def test_it_can_move_instances_up_to_its_repo_for_merchant
+    repo = Minitest::Mock.new
+    item = Item.new({id:"2", name:"Item_que", decription:"something",
+                    unit_price:"one", merchant_id:"7",
+                    created_at:"date1", updated_at:"date2"}, repo)
+    repo.expect(:find_merchant_by_merchant_id, [], [item.merchant_id])
+    item.merchant
+    repo.verify
+  end
+
 end

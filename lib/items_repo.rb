@@ -1,6 +1,6 @@
 require_relative '../lib/list_and_search_methods'
 require_relative '../lib/item'
-require 'bigdecimal' 
+require 'bigdecimal'
 
 class ItemsRepository
   include ListSearch
@@ -25,4 +25,14 @@ class ItemsRepository
       end
     end
   end
+
+  def find_invoice_items_by_invoice_id(instance)
+    @sales_engine.find_invoice_items_by_invoice_id(instance)
+  end
+
+  def find_merchant_by_merchant_id(instance)
+    @sales_engine.find_merchant_by_merchant_id(instance)
+  end
+
+
 end

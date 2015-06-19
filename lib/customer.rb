@@ -16,4 +16,9 @@ class Customer
   def to_s
     "Merchant #{id}"
   end
+
+  def invoices
+    @repo.find_all_invoices_by_id(id)
+  end
+
 end

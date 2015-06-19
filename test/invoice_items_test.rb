@@ -35,4 +35,20 @@ class InvoiceItemsTest < Minitest::Test
     assert_equal "2012-03-25 09:54:09 UTC", invoice.updated
   end
 
+  def test_it_can_move_instances_up_to_its_repo_for_invoices
+    repo = Minitest::Mock.new
+    invoice_item = InvoiceItem.new({id: 2, name: "Joe"}, repo)
+    repo.expect(:find_an_invoice_by_invoice_id, [], [invoice_item.invoice_id])
+    invoice_item.invoice
+    repo.verify
+  end
+
+  def test_it_can_move_instances_up_to_its_repo_for_items
+    repo = Minitest::Mock.new
+    invoice_item = InvoiceItem.new({id: 2, name: "Joe"}, repo)
+    repo.expect(:find_an_item_by_item_id, [], [invoice_item.item_id])
+    invoice_item.item
+    repo.verify
+  end
+
 end

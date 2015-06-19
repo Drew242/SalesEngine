@@ -56,6 +56,30 @@ class SalesEngine
     @merchant_repo.find_by_id(instance)
   end
 
+  def find_an_invoice_by_invoice_id(instance)
+    @invoice_repo.find_by_id(instance)
+  end
+
+  def find_an_item_by_item_id(instance)
+    @items_repo.find_by_id(instance)
+  end
+
+  def find_invoice_items_by_invoice_id(instance)
+    @invoice_items_repo.find_by_item_id(instance)
+  end
+
+  def find_a_merchant_by_merchant_id(instance)
+    @merchant_repo.find_by_id(instance)
+  end
+
+  def find_an_invoice_item_by_invoice_id(instance)
+    @invoice_repo.find_by_id(instance)
+  end
+
+  def find_invoices_by_id(instance)
+    @invoice_repo.find_by_customer_id(instance)
+  end 
+
 end
 
 if __FILE__ == $0

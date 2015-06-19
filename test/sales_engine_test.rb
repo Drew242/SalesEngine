@@ -98,7 +98,68 @@ class SalesEngineTest < Minitest::Test
     assert_equal "Jim", result.name
   end
 
+  def test_it_can_have_invoice_item_repo_look_for_invoice
+    engine    = SalesEngine.new
+    repo      = InvoiceRepository.new([{id:"4",customer_id:"67",merchant_id:"5",
+                                      status:"shipped",
+                                      created_at:"2012-03-25 09:54:09 UTC",
+                                      updated_at:"2012-03-25 09:54:09 UTC"}], engine)
+    engine.invoice_repo = repo
+    result              = engine.find_an_invoice_by_invoice_id(4)
+    assert_equal "shipped", result.status
+  end
 
+  def test_it_can_have_item_repo_look_for_an_item
+    engine    = SalesEngine.new
+    repo      = ItemsRepository.new([{id:"2", name:"Item_que", decription:"something",
+                                      unit_price:"one", merchant_id:"7",
+                                      created_at:"date1", updated_at:"date2"}], engine)
+    engine.items_repo   = repo
+    result              = engine.find_an_item_by_item_id(2)
+    assert_equal "Item_que", result.name
+  end
 
+  def test_it_can_have_invoice_item_repo_look_for_invoice_items
+    engine    = SalesEngine.new
+    repo      = InvoiceItemsRepository.new([{id:"4", invoice_id: "1",item_id:"67",merchant_id:"5",
+                                            status:"shipped", quantity:"9", unit_price: "23",
+                                            created_at:"2012-03-25 09:54:09 UTC",
+                                            updated_at:"2012-03-25 09:54:09 UTC"}], engine)
+    engine.invoice_items_repo   = repo
+    result                      = engine.find_invoice_items_by_invoice_id(67)
+    assert_equal 4, result.id
+  end
+
+  def test_it_can_have_merchant_repo_look_for_merchant
+    engine    = SalesEngine.new
+    repo      = MerchantRepository.new([{id:"42", name:"Jim",
+                                      created_at: "date1",
+                                      updated_at: "date2"}], engine)
+    engine.merchant_repo   = repo
+    result                 = engine.find_a_merchant_by_merchant_id(42)
+    assert_equal "Jim", result.name
+  end
+
+  def test_it_can_have_invoice_repo_look_for_invoice_for_transaction_items
+    engine    = SalesEngine.new
+    repo      = InvoiceRepository.new([{id:"4",customer_id:"67",merchant_id:"5",
+                                      status:"shipped",
+                                      created_at:"2012-03-25 09:54:09 UTC",
+                                      updated_at:"2012-03-25 09:54:09 UTC"}], engine)
+    engine.invoice_repo    = repo
+    result                 = engine.find_an_invoice_by_invoice_id(4)
+    assert_equal 67, result.customer_id
+  end
+
+  def test_it_can_have_invoice_repo_look_for_invoice_for_Customer_items
+    engine    = SalesEngine.new
+    repo      = InvoiceRepository.new([{id:"4",customer_id:"67",merchant_id:"5",
+                                      status:"shipped",
+                                      created_at:"2012-03-25 09:54:09 UTC",
+                                      updated_at:"2012-03-25 09:54:09 UTC"}], engine)
+    engine.invoice_repo    = repo
+    result                 = engine.find_invoices_by_id(67)
+    assert_equal 4, result.id
+  end
 
 end

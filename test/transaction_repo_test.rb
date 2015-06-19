@@ -81,6 +81,13 @@ class TransactionRepoTest < Minitest::Test
     assert_equal 2, result.size
   end
 
-
+  def test_it_can_move_instances_up_to_its_sales_engine_for_invoice_search
+    engine = Minitest::Mock.new
+    repo = TransactionRepository.new([{id: 2, invoice_id: "37"},
+                                      {id: 1, invoice_id: "37"}], engine)
+    engine.expect(:find_all_invoices_by_invoice_id, [], [37])
+    repo.find_all_invoices_by_invoice_id(37)
+    engine.verify
+  end
 
 end

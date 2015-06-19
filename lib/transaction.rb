@@ -28,4 +28,9 @@ class Transaction
   def to_s
     "Transaction #{id}"
   end
+
+  def invoice
+    @repo.find_all_invoices_by_invoice_id(invoice_id)
+  end
+  
 end

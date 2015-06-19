@@ -34,4 +34,16 @@ class TransactionsTest < Minitest::Test
     assert_equal "date2", transaction.updated
   end
 
+  def test_it_can_move_instances_up_to_its_repository_for_invoice_method
+    repo = Minitest::Mock.new
+    transaction = Transaction.new({id:"42", invoice_id:"2",
+                            credit_card_number:"4654405418249632",
+                            credit_card_expiration_data:"" ,result:"success",
+                            created_at:"date1", updated_at:"date2"}, repo)
+    repo.expect(:find_all_invoices_by_invoice_id, [], [transaction.invoice_id])
+    transaction.invoice
+    repo.verify
+  end
+
+
 end
