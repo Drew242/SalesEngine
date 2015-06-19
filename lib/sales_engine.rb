@@ -78,7 +78,7 @@ class SalesEngine
 
   def find_invoices_by_id(instance)
     @invoice_repo.find_by_customer_id(instance)
-  end 
+  end
 
 end
 

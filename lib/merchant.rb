@@ -20,11 +20,13 @@ class Merchant
   end
 
   def items
-    @repo.find_all_items_by_merchant_id(id)
+    @items ||= @repo.find_all_items_by_merchant_id(id)
   end
 
   def invoices
-    @repo.find_all_invoices_by_merchant_id(id)
+    @invoices ||= @repo.find_all_invoices_by_merchant_id(id)
   end
+
+  # ||= ensures that you only call the method once if needed
 
 end

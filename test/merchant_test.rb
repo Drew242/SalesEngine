@@ -31,7 +31,7 @@ class MerchantTest < Minitest::Test
   end
 
   def test_it_can_move_instances_up_to_its_repository_for_items_method
-    repo = Minitest::Mock.new
+    repo     = Minitest::Mock.new
     merchant = Merchant.new({id:"42", name:"Jim",
                             created_at: "date1",
                             updated_at: "date2"}, repo)
@@ -42,7 +42,7 @@ class MerchantTest < Minitest::Test
 
 
   def test_it_can_move_instances_up_to_its_repository_for_invoices_method
-    repo = Minitest::Mock.new
+    repo     = Minitest::Mock.new
     merchant = Merchant.new({id:"42", name:"Jim",
                               created_at: "date1",
                               updated_at: "date2"}, repo)

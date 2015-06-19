@@ -32,5 +32,5 @@ class Transaction
   def invoice
     @repo.find_all_invoices_by_invoice_id(invoice_id)
   end
-  
+
 end
