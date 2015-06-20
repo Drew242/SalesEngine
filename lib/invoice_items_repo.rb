@@ -25,6 +25,7 @@ class InvoiceItemsRepository
         return instance
       end
     end
+    return nil
   end
 
   def find_by_item_id(id)
@@ -33,6 +34,7 @@ class InvoiceItemsRepository
         return instance
       end
     end
+    return nil
   end
 
   def find_all_by_item_id(id)
@@ -56,6 +58,10 @@ class InvoiceItemsRepository
 
   def find_an_invoice_by_invoice_id(instance)
     @sales_engine.find_an_invoice_by_invoice_id(instance)
+  end
+
+  def find_an_item_by_item_id(instance)
+    @sales_engine.find_an_item_by_item_id(instance)
   end
 
 end

@@ -1,4 +1,4 @@
-require_relative '../lib/list_and_search_methods'
+ require_relative '../lib/list_and_search_methods'
 require_relative '../lib/invoice'
 class InvoiceRepository
   include ListSearch
@@ -27,6 +27,7 @@ class InvoiceRepository
         return instance
       end
     end
+    return nil
   end
 
   def find_by_customer_id(id)
@@ -35,6 +36,7 @@ class InvoiceRepository
         return instance
       end
     end
+    return nil
   end
 
   def find_all_by_customer_id(id)

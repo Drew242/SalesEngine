@@ -143,4 +143,11 @@ class InvoiceRepoTest < Minitest::Test
     engine.verify
   end
 
+  def test_it_can_find_all_by_customer_id
+    repo = InvoiceRepository.new([{customer_id: 2, status: "shipped"},
+                                 {customer_id: 1}], "sales_engine")
+    result = repo.find_all_by_customer_id(2)
+    assert_equal 1, result.size
+  end
+
 end

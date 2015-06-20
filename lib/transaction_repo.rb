@@ -28,6 +28,7 @@ class TransactionRepository
         return instance
       end
     end
+    return nil
   end
 
   def find_all_invoices_by_invoice_id(instance)

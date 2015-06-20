@@ -25,6 +25,7 @@ class CustomerRepository
         return instance
       end
     end
+    return nil
   end
 
   def find_all_by_first_name(first_name)
@@ -43,6 +44,7 @@ class CustomerRepository
         return instance
       end
     end
+    return nil
   end
 
   def find_all_invoices_by_id(instance)

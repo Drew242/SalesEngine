@@ -28,6 +28,7 @@ class ItemsRepository
         return instance
       end
     end
+    return nil
   end
 
   def find_invoice_items_by_invoice_id(instance)

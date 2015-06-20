@@ -13,6 +13,7 @@ module ListSearch
         return instance
       end
     end
+    return nil
   end
 
   def find_by_name(name)
@@ -21,6 +22,7 @@ module ListSearch
         return instance
       end
     end
+    return nil
   end
 
 
@@ -41,6 +43,7 @@ module ListSearch
         return instance
       end
     end
+    return nil
   end
 
   def find_by_updated_at(date)
@@ -49,6 +52,7 @@ module ListSearch
         return instance
       end
     end
+    return nil
   end
 
   def find_all_by_id(id)
@@ -98,6 +102,7 @@ module ListSearch
         return instance
       end
     end
+    return nil
   end
 
   def find_all_by_merchant_id(id)
@@ -117,6 +122,7 @@ module ListSearch
         return instance
       end
     end
+    return nil
   end
 
   def find_all_by_invoice_id(id)
@@ -135,6 +141,7 @@ module ListSearch
         return instance
       end
     end
+    return nil
   end
 
 end
