@@ -3,7 +3,7 @@ require_relative '../test/test_helper'
 
 class ItemsRepoTest < Minitest::Test
   def setup
-    @file = File.expand_path("../test/fixtures/item_fixture.csv", __dir__)
+    @file = File.expand_path("../test/fixtures/items.csv", __dir__)
   end
 
   def test_it_can_hold_a_new_item

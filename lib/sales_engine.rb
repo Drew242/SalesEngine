@@ -11,14 +11,14 @@ class SalesEngine
  attr_accessor :merchant_repo, :customer_repo, :transaction_repo,
                :invoice_repo, :invoice_items_repo, :items_repo
 
-  def startup()
+  def startup( dir = "data")
     reader         = FileReader.new
-    merchants      = reader.read(File.expand_path("./data/merchants.csv"))
-    customers      = reader.read(File.expand_path("./data/customers.csv"))
-    transactions   = reader.read(File.expand_path("./data/transactions.csv"))
-    invoices       = reader.read(File.expand_path("./data/invoices.csv"))
-    invoice_items  = reader.read(File.expand_path("./data/invoice_items.csv"))
-    items          = reader.read(File.expand_path("./data/items.csv"))
+    merchants      = reader.read(File.expand_path("./#{dir}/merchants.csv"))
+    customers      = reader.read(File.expand_path("./#{dir}/customers.csv"))
+    transactions   = reader.read(File.expand_path("./#{dir}/transactions.csv"))
+    invoices       = reader.read(File.expand_path("./#{dir}/invoices.csv"))
+    invoice_items  = reader.read(File.expand_path("./#{dir}/invoice_items.csv"))
+    items          = reader.read(File.expand_path("./#{dir}/items.csv"))
     @merchant_repo      = MerchantRepository.new(merchants, self)
     @customer_repo      = CustomerRepository.new(customer, self)
     @transactions_repo  = TransactionsRepository.new(transactions, self)
