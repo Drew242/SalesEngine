@@ -11,10 +11,15 @@ class TransactionRepository
     @sales_engine = sales_engine
     @instances = manage
   end
+
   def manage
     return data.map do |line|
       Transaction.new(line, self)
     end
+  end
+
+  def inspect
+    "#<#{self.class} #{@instances.size} rows>"
   end
 
   def find_by_cc_num(num)

@@ -17,6 +17,10 @@ class InvoiceRepository
     end
   end
 
+  def inspect
+    "#<#{self.class} #{@instances.size} rows>"
+  end
+
   def find_by_status(status)
     instances.select do |instance|
       if instance.status.downcase.include?(status.downcase)

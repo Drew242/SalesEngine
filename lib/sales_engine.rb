@@ -11,7 +11,7 @@ class SalesEngine
  attr_accessor :merchant_repo, :customer_repo, :transaction_repo,
                :invoice_repo, :invoice_items_repo, :items_repo
 
-  def startup( dir = "data")
+  def startup(dir = "data")
     reader         = FileReader.new
     merchants      = reader.read(File.expand_path("./#{dir}/merchants.csv"))
     customers      = reader.read(File.expand_path("./#{dir}/customers.csv"))

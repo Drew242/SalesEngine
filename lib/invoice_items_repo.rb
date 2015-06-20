@@ -15,6 +15,10 @@ class InvoiceItemsRepository
     end
   end
 
+  def inspect
+    "#<#{self.class} #{@instances.size} rows>"
+  end
+
   def find_by_quantity(quantity)
     instances.select do |instance|
       if instance.quantity == quantity

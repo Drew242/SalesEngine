@@ -18,6 +18,10 @@ class ItemsRepository
     end
   end
 
+  def inspect
+    "#<#{self.class} #{@instances.size} rows>"
+  end
+
   def find_by_description(description)
     instances.select do |instance|
       if instance.description.downcase.include?(description.downcase)

@@ -15,6 +15,10 @@ class CustomerRepository
     end
   end
 
+  def inspect
+    "#<#{self.class} #{@instances.size} rows>"
+  end
+
   def find_by_first_name(first_name)
     instances.select do |instance|
       if instance.first_name.downcase.include?(first_name.downcase)
