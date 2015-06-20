@@ -29,6 +29,24 @@ class InvoiceRepository
     end
   end
 
+  def find_by_customer_id(id)
+    instances.select do |instance|
+      if instance.customer_id == id
+        return instance
+      end
+    end
+  end
+
+  def find_all_by_customer_id(id)
+    invoices = []
+    instances.select do |instance|
+      if instance.customer_id == id
+        invoices << instance
+      end
+    end
+    invoices
+  end
+
   def find_all_invoice_items_by_invoice_id(id)
     @sales_engine.find_all_invoice_items_by_invoice_id(id)
   end

@@ -1,10 +1,10 @@
 module ListSearch
-  def all()
+  def all
     instances
   end
 
-  def random()
-    instances.shuffle.first
+  def random
+    instances.sample
   end
 
   def find_by_id(id)
@@ -110,13 +110,6 @@ module ListSearch
     return result
   end
 
-  def find_by_customer_id(id)
-    instances.select do |instance|
-      if instance.customer_id == id
-        return instance
-      end
-    end
-  end
 
   def find_by_invoice_id(id)
     instances.select do |instance|
