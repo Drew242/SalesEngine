@@ -131,4 +131,19 @@ class MerchantRepoTest < Minitest::Test
         assert_equal 4, result[1].id
       end
 
+      def test_most_revenue_will_return_top_merchants_by_total_revenue
+        reader = FileReader.new
+        data                           = reader.read(@file)
+        engine                         = SalesEngine.new
+        repo                           = MerchantRepository.new(data, engine)
+        invoice_data                   = reader.read(File.expand_path("../test/fixtures/invoices.csv", __dir__))
+        engine.invoice_repository      = InvoiceRepository.new(invoice_data, engine)
+        invoice_items_data             = reader.read(File.expand_path("../test/fixtures/invoice_items.csv", __dir__))
+        engine.invoice_item_repository = InvoiceItemsRepository.new(invoice_items_data, engine)
+        transaction_data               = reader.read(File.expand_path("../test/fixtures/transactions.csv", __dir__))
+        engine.transaction_repository  = TransactionRepository.new(transaction_data, engine)
+        engine.merchant_repository     = repo
+        assert_equal "Schroeder-Jerde", repo.most_revenue(1)[0].name
+      end
+
     end

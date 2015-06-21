@@ -28,18 +28,22 @@ class Merchant
   end
 
   def revenue
-    ii = invoices.map do |invoice|
+    ii = get_invoice_items
+    revenue = 0
+    ii.compact.each do |invoice_item|
+      revenue += (invoice_item.price * invoice_item.quantity)
+    end
+    revenue
+  end
+
+  def get_invoice_items
+    return invoices.map do |invoice|
       invoice.transactions.map do |transaction|
         if transaction.result == "success"
           invoice.invoice_items
         end
       end
     end.flatten
-    revenue = 0
-    ii.compact.each do |invoice_item|
-        revenue += (invoice_item.price * invoice_item.quantity)
-    end
-    revenue
   end
 
 end

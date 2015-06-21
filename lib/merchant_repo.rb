@@ -42,4 +42,11 @@ class MerchantRepository
     end
   end
 
+  def most_revenue(num_of_top_merchants)
+    revenue = @instances.sort do |a, b|
+      b.revenue <=> a.revenue
+    end
+    return revenue.take(num_of_top_merchants)
+  end
+
 end

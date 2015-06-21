@@ -84,7 +84,7 @@ class InvoiceItemsRepoTest < Minitest::Test
     data = FileReader.new.read(@file)
     repo = InvoiceItemsRepository.new(data, "sales_engine")
     invoice_items = repo.manage
-    result = repo.find_by_invoice_id(2)
+    result = repo.find_by_invoice_id(8)
     assert_equal 9 , result.quantity
   end
 
