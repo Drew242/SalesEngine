@@ -45,6 +45,13 @@ class CustomerRepoTest < Minitest::Test
     assert_equal 3, result.id
   end
 
+  def test_it_can_find_all_based_off_of_first_name
+    data = FileReader.new.read(@file)
+    repo = CustomerRepository.new(data, "sales_engine")
+    result = repo.find_all_by_first_name("MarIah")
+    assert_equal 1, result.size
+  end
+
   def test_it_can_find_an_instance_based_off_of_last_name
     data = FileReader.new.read(@file)
     repo = CustomerRepository.new(data, "sales_engine")

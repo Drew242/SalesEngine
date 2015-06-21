@@ -17,6 +17,14 @@ class Invoice
     @repo        = repo
   end
 
+  def inspect
+    to_s
+  end
+
+  def to_s
+    "Invoice #{id}"
+  end
+
   def transactions
     @repo.find_all_transactions_by_invoice_id(id)
   end

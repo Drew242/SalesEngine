@@ -30,6 +30,16 @@ class InvoiceRepository
     return nil
   end
 
+  def find_all_by_status(status)
+    total = []
+    instances.select do |instance|
+      if instance.status.downcase.include?(status.downcase)
+        total << instance
+      end
+    end
+    return total
+  end
+
   def find_by_customer_id(id)
     instances.select do |instance|
       if instance.customer_id == id

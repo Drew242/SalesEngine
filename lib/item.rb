@@ -12,7 +12,7 @@ class Item
     @id          = data[:id].to_i
     @name        = data[:name]
     @description = data[:description]
-    @price       = data[:unit_price]
+    @price       = BigDecimal.new(data[:unit_price].insert(-3, "."))
     @merchant_id = data[:merchant_id].to_i
     @created     = data[:created_at]
     @updated     = data[:updated_at]

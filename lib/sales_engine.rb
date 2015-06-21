@@ -1,3 +1,4 @@
+require 'bigdecimal'
 require_relative '../lib/file_reader'
 require_relative '../lib/merchant_repo'
 require_relative '../lib/customer_repo'
@@ -8,8 +9,8 @@ require_relative '../lib/items_repo'
 require 'csv'
 
 class SalesEngine
- attr_accessor :merchant_repository, :customer_repository, :transaction_repository,
-               :invoice_repository, :invoice_item_repository, :item_repository
+  attr_accessor :merchant_repository, :customer_repository, :transaction_repository,
+  :invoice_repository, :invoice_item_repository, :item_repository
 
   def initialize (path = "data/")
     @dir = path
@@ -48,15 +49,21 @@ class SalesEngine
   end
 
   def find_all_items_by_invoice_id(instance)
-    result = invoice_item_repository.find_by_invoice_id(instance)
-    item_repository.find_all_by_id(result.item_id)
+    result = invoice_item_repository.find_all_by_invoice_id(instance)
+    return result.map do |invoice_item|
+      item_repository.find_all_by_id(invoice_item.item_id)
+    end.flatten
   end
 
   def find_a_customer_by_customer_id(instance)
     customer_repository.find_by_id(instance)
   end
 
-  def find_a_merchant_by_merchant_id(instance)
+  def find_a_customer_by_invoice_id(instance)
+    customer_repository.find_by_id(instance)
+  end
+
+  def find_merchant_by_merchant_id(instance)
     merchant_repository.find_by_id(instance)
   end
 
@@ -68,15 +75,11 @@ class SalesEngine
     item_repository.find_by_id(instance)
   end
 
-  def find_invoice_items_by_invoice_id(instance)
-    invoice_item_repository.find_by_item_id(instance)
+  def find_invoice_items_by_item_id(instance)
+    invoice_item_repository.find_all_by_item_id(instance)
   end
 
-  def find_a_merchant_by_merchant_id(instance)
-    merchant_repository.find_by_id(instance)
-  end
-
-  def find_an_invoice_item_by_invoice_id(instance)
+  def find_an_invoice_by_invoice_id(instance)
     invoice_repository.find_by_id(instance)
   end
 

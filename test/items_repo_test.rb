@@ -61,8 +61,8 @@ class ItemsRepoTest < Minitest::Test
   def test_it_can_find_an_instance_based_off_of_unit_price
     data = FileReader.new.read(@file)
     repo = ItemsRepository.new(data, "sales_engine")
-    result = repo.find_by_unit_price("75107")
-    assert_equal 1, result.id
+    result = repo.find_by_unit_price(BigDecimal.new("751.07"))
+    assert_equal "Item Qui Esse", result.name
   end
 
   def test_it_can_find_an_instance_based_off_of_merchant_id
@@ -88,15 +88,15 @@ class ItemsRepoTest < Minitest::Test
 
   def test_it_can_move_instances_up_to_its_sales_engine_for_invoice_items
     engine = Minitest::Mock.new
-    repo = ItemsRepository.new([{id: 2, name: "Joe"}], engine)
-    engine.expect(:find_invoice_items_by_invoice_id, [], [2])
-    repo.find_invoice_items_by_invoice_id(2)
+    repo = ItemsRepository.new([{id: 2, name: "Joe", unit_price: "1234"}], engine)
+    engine.expect(:find_invoice_items_by_item_id, [], [2])
+    repo.find_invoice_items_by_item_id(2)
     engine.verify
   end
 
   def test_it_can_move_instances_up_to_its_sales_engine_for_merchant
     engine = Minitest::Mock.new
-    repo = ItemsRepository.new([{id: 2, name: "Joe"}], engine)
+    repo = ItemsRepository.new([{id: 2, name: "Joe", unit_price: "1234"}], engine)
     engine.expect(:find_merchant_by_merchant_id, [], [2])
     repo.find_merchant_by_merchant_id(2)
     engine.verify

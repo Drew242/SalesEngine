@@ -66,6 +66,13 @@ class InvoiceRepoTest < Minitest::Test
     assert_equal 1, result.customer_id
   end
 
+  def test_it_can_find_all_instances_based_off_of_status
+    data = FileReader.new.read(@file)
+    repo = InvoiceRepository.new(data, "sales_engine")
+    result = repo.find_all_by_status("ShiPped")
+    assert_equal 8, result.size
+  end
+
   def test_it_can_find_an_instance_based_off_of_created_at
     data = FileReader.new.read(@file)
     repo = InvoiceRepository.new(data, "sales_engine")

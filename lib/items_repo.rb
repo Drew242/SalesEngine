@@ -1,3 +1,4 @@
+require 'bigdecimal'
 require_relative '../lib/list_and_search_methods'
 require_relative '../lib/item'
 require 'bigdecimal'
@@ -31,8 +32,8 @@ class ItemsRepository
     return nil
   end
 
-  def find_invoice_items_by_invoice_id(instance)
-    @sales_engine.find_invoice_items_by_invoice_id(instance)
+  def find_invoice_items_by_item_id(instance)
+    @sales_engine.find_invoice_items_by_item_id(instance)
   end
 
   def find_merchant_by_merchant_id(instance)

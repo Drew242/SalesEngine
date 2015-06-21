@@ -14,7 +14,7 @@ class Customer
   end
 
   def to_s
-    "Merchant #{id}"
+    "Customer #{id}"
   end
 
   def invoices

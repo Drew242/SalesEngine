@@ -81,12 +81,26 @@ class TransactionRepoTest < Minitest::Test
     assert_equal 2, result.size
   end
 
+  def test_it_can_find_all_instances_based_off_of_result
+    data = FileReader.new.read(@file)
+    repo = TransactionRepository.new(data, "sales_engine")
+    result = repo.find_all_by_result("success")
+    assert_equal 5, result.size
+  end
+
+  def test_it_can_find_an_instance_based_off_of_cc_number
+    data = FileReader.new.read(@file)
+    repo = TransactionRepository.new(data, "sales_engine")
+    result = repo.find_by_credit_card_number("4654405418249632")
+    assert_equal 1, result.id
+  end
+
   def test_it_can_move_instances_up_to_its_sales_engine_for_invoice_search
     engine = Minitest::Mock.new
     repo = TransactionRepository.new([{id: 2, invoice_id: "37"},
                                       {id: 1, invoice_id: "37"}], engine)
-    engine.expect(:find_all_invoices_by_invoice_id, [], [37])
-    repo.find_all_invoices_by_invoice_id(37)
+    engine.expect(:find_an_invoice_by_invoice_id, [], [37])
+    repo.find_an_invoice_by_invoice_id(37)
     engine.verify
   end
 

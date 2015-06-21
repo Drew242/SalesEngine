@@ -1,3 +1,4 @@
+
 require_relative '../test/test_helper'
 require_relative '../lib/item'
 
@@ -25,9 +26,9 @@ class ItemTest < Minitest::Test
 
   def test_it_has_a_unit_price
     item = Item.new({id:"2", name:"Item_que", decription:"something",
-                    unit_price:"1", merchant_id:"7",
+                    unit_price:"1234", merchant_id:"7",
                     created_at:"date1", updated_at:"date2"}, "repo")
-    assert_equal "1", item.price
+    assert_equal 12.34, item.price.to_f
   end
 
   def test_it_has_a_merchant_id

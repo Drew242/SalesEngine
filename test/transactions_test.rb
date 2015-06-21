@@ -40,7 +40,7 @@ class TransactionsTest < Minitest::Test
                             credit_card_number:"4654405418249632",
                             credit_card_expiration_data:"" ,result:"success",
                             created_at:"date1", updated_at:"date2"}, repo)
-    repo.expect(:find_all_invoices_by_invoice_id, [], [transaction.invoice_id])
+    repo.expect(:find_an_invoice_by_invoice_id, [], [transaction.invoice_id])
     transaction.invoice
     repo.verify
   end

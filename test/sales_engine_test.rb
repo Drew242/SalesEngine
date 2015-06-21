@@ -94,7 +94,7 @@ class SalesEngineTest < Minitest::Test
                                       created_at: "date1",
                                       updated_at: "date2"}], engine)
     engine.merchant_repository = repo
-    result                     = engine.find_a_merchant_by_merchant_id(42)
+    result                     = engine.find_merchant_by_merchant_id(42)
     assert_equal "Jim", result.name
   end
 
@@ -126,8 +126,8 @@ class SalesEngineTest < Minitest::Test
                                             created_at:"2012-03-25 09:54:09 UTC",
                                             updated_at:"2012-03-25 09:54:09 UTC"}], engine)
     engine.invoice_item_repository   = repo
-    result                           = engine.find_invoice_items_by_invoice_id(67)
-    assert_equal 4, result.id
+    result                           = engine.find_invoice_items_by_item_id(67)
+    assert_equal 4, result[0].id
   end
 
   def test_it_can_have_merchant_repo_look_for_merchant
@@ -136,7 +136,7 @@ class SalesEngineTest < Minitest::Test
                                       created_at: "date1",
                                       updated_at: "date2"}], engine)
     engine.merchant_repository   = repo
-    result                       = engine.find_a_merchant_by_merchant_id(42)
+    result                       = engine.find_merchant_by_merchant_id(42)
     assert_equal "Jim", result.name
   end
 

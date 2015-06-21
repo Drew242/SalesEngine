@@ -1,3 +1,4 @@
+require 'bigdecimal'
 module ListSearch
   def all
     instances
@@ -136,7 +137,7 @@ module ListSearch
   end
 
   def find_by_unit_price(price)
-    instances.select do |instance|
+    instances.each do |instance|
       if instance.price == price
         return instance
       end

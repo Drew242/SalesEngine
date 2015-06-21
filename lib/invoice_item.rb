@@ -19,6 +19,14 @@ class InvoiceItem
     @repo        = repo
   end
 
+  def inspect
+    to_s
+  end
+
+  def to_s
+    "Invoice Item #{id}"
+  end
+
   def invoice
     @repo.find_an_invoice_by_invoice_id(invoice_id)
   end
