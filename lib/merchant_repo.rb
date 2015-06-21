@@ -30,4 +30,16 @@ class MerchantRepository
     @sales_engine.find_all_invoices_by_merchant_id(instance)
   end
 
+  def most_items(num_of_top_merchants)
+    items = @instances.map do |merchant|
+      find_all_items_by_merchant_id(merchant.id)
+    end
+    items.sort! do |a, b|
+      b.length <=> a.length
+    end
+    merchants = items.take(num_of_top_merchants).map do |item|
+      find_by_id(item[0].merchant_id)
+    end
+  end
+
 end

@@ -106,20 +106,29 @@ class MerchantRepoTest < Minitest::Test
   def test_it_can_move_instances_up_to_its_sales_engine_for_items_search
     engine = Minitest::Mock.new
     repo = MerchantRepository.new([{id: 2, name: "Joe"},
-                                  {id: 1, name: "Jim"}], engine)
-    engine.expect(:find_all_items_by_merchant_id, [], [2])
-    repo.find_all_items_by_merchant_id(2)
-    engine.verify
-  end
+      {id: 1, name: "Jim"}], engine)
+      engine.expect(:find_all_items_by_merchant_id, [], [2])
+      repo.find_all_items_by_merchant_id(2)
+      engine.verify
+    end
 
-  def test_it_can_move_instances_up_to_its_sales_engine_for_invoices_search
-    engine = Minitest::Mock.new
-    repo = MerchantRepository.new([{id: 2, name: "Joe"},
-                                  {id: 1, name: "Jim"}] , engine)
-    engine.expect(:find_all_invoices_by_merchant_id, [], [2])
-    repo.find_all_invoices_by_merchant_id(2)
-    engine.verify
-  end
+    def test_it_can_move_instances_up_to_its_sales_engine_for_invoices_search
+      engine = Minitest::Mock.new
+      repo = MerchantRepository.new([{id: 2, name: "Joe"},
+        {id: 1, name: "Jim"}] , engine)
+        engine.expect(:find_all_invoices_by_merchant_id, [], [2])
+        repo.find_all_invoices_by_merchant_id(2)
+        engine.verify
+      end
 
+      def test_it_finds_most_items_by_merchant_id
+        engine     = SalesEngine.new
+        data       = FileReader.new.read(@file)
+        item_data  = FileReader.new.read(File.expand_path("../test/fixtures/items.csv", __dir__))
+        repo       = MerchantRepository.new(data, engine)
+        engine.item_repository = ItemsRepository.new(item_data, engine)
+        result = repo.most_items(2)
+        assert_equal 4, result[1].id
+      end
 
-end
+    end

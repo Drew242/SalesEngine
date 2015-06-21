@@ -9,8 +9,10 @@ require_relative '../lib/items_repo'
 require 'csv'
 
 class SalesEngine
-  attr_accessor :merchant_repository, :customer_repository, :transaction_repository,
-  :invoice_repository, :invoice_item_repository, :item_repository
+  attr_accessor :merchant_repository, :customer_repository,
+  :transaction_repository,
+  :invoice_repository, :invoice_item_repository,
+   :item_repository
 
   def initialize (path = "data/")
     @dir = path
