@@ -67,7 +67,7 @@ class InvoiceItemsRepoTest < Minitest::Test
     data = FileReader.new.read(@file)
     repo = InvoiceItemsRepository.new(data, "sales_engine")
     invoice_items = repo.manage
-    result = repo.find_all_by_unit_price("13635")
+    result = repo.find_all_by_unit_price(BigDecimal.new("136.35"))
     assert_equal 3 , result.size
   end
 
@@ -75,7 +75,7 @@ class InvoiceItemsRepoTest < Minitest::Test
     data = FileReader.new.read(@file)
     repo = InvoiceItemsRepository.new(data, "sales_engine")
     invoice_items = repo.manage
-    result = repo.find_by_unit_price("23324")
+    result = repo.find_by_unit_price(BigDecimal.new("233.24"))
     assert_equal 528 , result.item_id
   end
 
@@ -140,7 +140,7 @@ class InvoiceItemsRepoTest < Minitest::Test
 
   def test_it_can_move_instances_up_to_its_sales_engine_for_items
     engine = Minitest::Mock.new
-    repo = InvoiceItemsRepository.new([{id: 2, name: "Joe"}], engine)
+    repo = InvoiceItemsRepository.new([{id: 2, name: "Joe", unit_price:"455555"}], engine)
     engine.expect(:find_an_invoice_by_invoice_id, [], [2])
     repo.find_an_invoice_by_invoice_id(2)
     engine.verify
@@ -148,7 +148,7 @@ class InvoiceItemsRepoTest < Minitest::Test
 
   def test_it_can_move_instances_up_to_its_sales_engine_for_items
     engine = Minitest::Mock.new
-    repo = InvoiceItemsRepository.new([{id: 2, name: "Joe", item_id: 3}], engine)
+    repo = InvoiceItemsRepository.new([{id: 2, name: "Joe", item_id: 3, unit_price:"455555"}], engine)
     engine.expect(:find_an_item_by_item_id, [], [3])
     repo.find_an_item_by_item_id(3)
     engine.verify

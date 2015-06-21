@@ -51,5 +51,18 @@ class MerchantTest < Minitest::Test
     repo.verify
   end
 
+  def test_revenue_will_return_merchant_revenue
+    engine   = SalesEngine.new
+    repo     = MerchantRepository.new([{id:"1", name:"Jim",
+                            created_at: "date1",
+                            updated_at: "date2"}],engine)
+    engine.invoice_repository = InvoiceRepository.new([{merchant_id: 1, id: 2}], engine)
+    engine.invoice_item_repository = InvoiceItemsRepository.new([{id:25, invoice_id: 2, unit_price: "300", quantity: 3}], engine)
+    engine.transaction_repository  = TransactionRepository.new([{id: 1, invoice_id: 2, result: "success"}], engine)
+    engine.merchant_repository = repo
+
+    merchant = repo.find_by_id(1)
+    assert_equal 9.00, merchant.revenue.to_f
+  end
 
 end

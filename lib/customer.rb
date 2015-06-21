@@ -1,3 +1,4 @@
+require 'bigdecimal'
 class Customer
   attr_reader :id, :first_name, :last_name, :created, :updated
   def initialize(data, repo)

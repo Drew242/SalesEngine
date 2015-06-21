@@ -1,5 +1,6 @@
 require_relative '../lib/list_and_search_methods'
 require_relative '../lib/invoice_item'
+require 'bigdecimal'
 class InvoiceItemsRepository
   include ListSearch
   attr_reader :data, :sales_engine, :instances

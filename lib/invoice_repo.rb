@@ -1,5 +1,6 @@
- require_relative '../lib/list_and_search_methods'
+require_relative '../lib/list_and_search_methods'
 require_relative '../lib/invoice'
+require 'bigdecimal'
 class InvoiceRepository
   include ListSearch
 

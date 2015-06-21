@@ -37,7 +37,7 @@ class InvoiceItemsTest < Minitest::Test
 
   def test_it_can_move_instances_up_to_its_repo_for_invoices
     repo = Minitest::Mock.new
-    invoice_item = InvoiceItem.new({id: 2, name: "Joe"}, repo)
+    invoice_item = InvoiceItem.new({id: 2, name: "Joe", unit_price:"455555"}, repo)
     repo.expect(:find_an_invoice_by_invoice_id, [], [invoice_item.invoice_id])
     invoice_item.invoice
     repo.verify
@@ -45,7 +45,7 @@ class InvoiceItemsTest < Minitest::Test
 
   def test_it_can_move_instances_up_to_its_repo_for_items
     repo = Minitest::Mock.new
-    invoice_item = InvoiceItem.new({id: 2, name: "Joe"}, repo)
+    invoice_item = InvoiceItem.new({id: 2, name: "Joe", unit_price:"455555"}, repo)
     repo.expect(:find_an_item_by_item_id, [], [invoice_item.item_id])
     invoice_item.item
     repo.verify
