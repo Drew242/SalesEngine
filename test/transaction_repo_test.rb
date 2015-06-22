@@ -85,7 +85,7 @@ class TransactionRepoTest < Minitest::Test
     data = FileReader.new.read(@file)
     repo = TransactionRepository.new(data, "sales_engine")
     result = repo.find_all_by_result("success")
-    assert_equal 5, result.size
+    assert_equal 6, result.size
   end
 
   def test_it_can_find_an_instance_based_off_of_cc_number

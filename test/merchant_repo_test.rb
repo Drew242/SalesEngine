@@ -133,7 +133,7 @@ class MerchantRepoTest < Minitest::Test
         engine.invoice_item_repository = InvoiceItemsRepository.new(invoice_item_data, engine)
         engine.merchant_repository = repo
         result = repo.most_items(2)
-        assert_equal 1, result[1].id
+        assert_equal 5, result[1].id
       end
 
       def test_most_revenue_will_return_top_merchants_by_total_revenue
