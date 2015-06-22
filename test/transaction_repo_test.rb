@@ -14,7 +14,10 @@ class TransactionRepoTest < Minitest::Test
   end
 
   def test_it_can_return_correct_size
-    repo = TransactionRepository.new([{id: 2, invoice_id: "37"}, {id: 1, invoice_id: "37"}], "sales_engine")
+    repo = TransactionRepository.new([{id: 2, invoice_id: "37",  created_at: "2012-03-26 09:54:09 UTC",
+                                    updated_at: "2012-03-26 09:54:09 UTC"},
+                                    {id: 1, invoice_id: "37",  created_at: "2012-03-26 09:54:09 UTC",
+                                    updated_at: "2012-03-26 09:54:09 UTC"}], "sales_engine")
     result = repo.all
     assert_equal  2 , result.size
 
@@ -71,14 +74,14 @@ class TransactionRepoTest < Minitest::Test
     data = FileReader.new.read(@file)
     repo = TransactionRepository.new(data, "sales_engine")
     result = repo.find_all_by_created_at("2012-03-27 14:54:09 UTC")
-    assert_equal 2, result.size
+    assert_equal 6, result.size
   end
 
   def test_it_can_find_all_instances_based_off_of_updated_at
     data = FileReader.new.read(@file)
     repo = TransactionRepository.new(data, "sales_engine")
     result = repo.find_all_by_updated_at("2012-03-27 14:54:09 UTC")
-    assert_equal 2, result.size
+    assert_equal 6, result.size
   end
 
   def test_it_can_find_all_instances_based_off_of_result
@@ -97,8 +100,10 @@ class TransactionRepoTest < Minitest::Test
 
   def test_it_can_move_instances_up_to_its_sales_engine_for_invoice_search
     engine = Minitest::Mock.new
-    repo = TransactionRepository.new([{id: 2, invoice_id: "37"},
-                                      {id: 1, invoice_id: "37"}], engine)
+    repo = TransactionRepository.new([{id: 2, invoice_id: "37",  created_at: "2012-03-26 09:54:09 UTC",
+                                      updated_at: "2012-03-26 09:54:09 UTC"},
+                                      {id: 1, invoice_id: "37", created_at: "2012-03-26 09:54:09 UTC",
+                                        updated_at: "2012-03-26 09:54:09 UTC"}], engine)
     engine.expect(:find_an_invoice_by_invoice_id, [], [37])
     repo.find_an_invoice_by_invoice_id(37)
     engine.verify

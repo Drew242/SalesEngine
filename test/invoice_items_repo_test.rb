@@ -140,7 +140,8 @@ class InvoiceItemsRepoTest < Minitest::Test
 
   def test_it_can_move_instances_up_to_its_sales_engine_for_items
     engine = Minitest::Mock.new
-    repo = InvoiceItemsRepository.new([{id: 2, name: "Joe", unit_price:"455555"}], engine)
+    repo = InvoiceItemsRepository.new([{id: 2, name: "Joe", unit_price:"455555",  created_at: "2012-03-26 09:54:09 UTC",
+                                      updated_at: "2012-03-26 09:54:09 UTC"}], engine)
     engine.expect(:find_an_invoice_by_invoice_id, [], [2])
     repo.find_an_invoice_by_invoice_id(2)
     engine.verify
@@ -148,7 +149,8 @@ class InvoiceItemsRepoTest < Minitest::Test
 
   def test_it_can_move_instances_up_to_its_sales_engine_for_items
     engine = Minitest::Mock.new
-    repo = InvoiceItemsRepository.new([{id: 2, name: "Joe", item_id: 3, unit_price:"455555"}], engine)
+    repo = InvoiceItemsRepository.new([{id: 2, name: "Joe", item_id: 3, unit_price:"455555",  created_at: "2012-03-26 09:54:09 UTC",
+                                      updated_at: "2012-03-26 09:54:09 UTC"}], engine)
     engine.expect(:find_an_item_by_item_id, [], [3])
     repo.find_an_item_by_item_id(3)
     engine.verify

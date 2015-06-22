@@ -6,7 +6,7 @@ class TransactionsTest < Minitest::Test
     transaction = Transaction.new({id:"42", invoice_id:"2",
                                   credit_card_number:"4654405418249632",
                                   credit_card_expiration_data:"" ,result:"success",
-                                   created_at:"date1", updated_at:"date2"}, "repo")
+                                   created_at:"2012-03-25 09:54:09 UTC", updated_at:"2012-03-26 09:54:09 UTC"}, "repo")
     assert_equal 42, transaction.id
   end
 
@@ -14,7 +14,7 @@ class TransactionsTest < Minitest::Test
     transaction = Transaction.new({id:"42", invoice_id:"2",
                                   credit_card_number:"4654405418249632",
                                   credit_card_expiration_data:"" ,result:"success",
-                                   created_at:"date1", updated_at:"date2"}, "repo")
+                                   created_at:"2012-03-25 09:54:09 UTC", updated_at:"2012-03-26 09:54:09 UTC"}, "repo")
     assert_equal 2, transaction.invoice_id
   end
 
@@ -22,16 +22,16 @@ class TransactionsTest < Minitest::Test
     transaction = Transaction.new({id:"42", invoice_id:"2",
                                   credit_card_number:"4654405418249632",
                                   credit_card_expiration_data:"" ,result:"success",
-                                   created_at:"date1", updated_at:"date2"}, "repo")
-    assert_equal "date1", transaction.created
+                                   created_at:"2012-03-25 09:54:09 UTC", updated_at:"2012-03-26 09:54:09 UTC"}, "repo")
+    assert_equal Date.parse("2012-03-25 09:54:09 UTC"), transaction.created
   end
 
   def test_id_has_an_updated_at_date
     transaction = Transaction.new({id:"42", invoice_id:"2",
                                   credit_card_number:"4654405418249632",
                                   credit_card_expiration_data:"" ,result:"success",
-                                   created_at:"date1", updated_at:"date2"}, "repo")
-    assert_equal "date2", transaction.updated
+                                   created_at:"2012-03-25 09:54:09 UTC", updated_at:"2012-03-26 09:54:09 UTC"}, "repo")
+    assert_equal Date.parse("2012-03-26 09:54:09 UTC"), transaction.updated
   end
 
   def test_it_can_move_instances_up_to_its_repository_for_invoice_method
@@ -39,7 +39,7 @@ class TransactionsTest < Minitest::Test
     transaction = Transaction.new({id:"42", invoice_id:"2",
                             credit_card_number:"4654405418249632",
                             credit_card_expiration_data:"" ,result:"success",
-                            created_at:"date1", updated_at:"date2"}, repo)
+                            created_at:"2012-03-25 09:54:09 UTC", updated_at:"2012-03-26 09:54:09 UTC"}, repo)
     repo.expect(:find_an_invoice_by_invoice_id, [], [transaction.invoice_id])
     transaction.invoice
     repo.verify

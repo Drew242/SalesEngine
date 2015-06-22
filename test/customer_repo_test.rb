@@ -77,13 +77,15 @@ class CustomerRepoTest < Minitest::Test
     data = FileReader.new.read(@file)
     repo = CustomerRepository.new(data, "sales_engine")
     result = repo.find_by_updated_at("2012-03-27 14:54:10 UTC")
-    assert_equal 2, result.id
+    assert_equal 1, result.id
   end
 
   def test_it_can_move_instances_up_to_its_sales_engine_for_invoices_search
     engine = Minitest::Mock.new
-    repo = CustomerRepository.new([{id: 2, name: "Joe"},
-                                  {id: 1, name: "Jim"}] , engine)
+    repo = CustomerRepository.new([{id: 2, name: "Joe",  created_at: "2012-03-26 09:54:09 UTC",
+                                  updated_at: "2012-03-26 09:54:09 UTC"},
+                                  {id: 1, name: "Jim",  created_at: "2012-03-26 09:54:09 UTC",
+                                    updated_at: "2012-03-26 09:54:09 UTC"}] , engine)
     engine.expect(:find_all_invoices_by_id, [], [2])
     repo.find_all_invoices_by_id(2)
     engine.verify

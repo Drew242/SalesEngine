@@ -15,8 +15,8 @@ class Transaction
     @cc_num      = data[:credit_card_number]
     @cc_ex       = data[:credit_card_expiration_date]
     @merchant_id = data[:merchant_id].to_i
-    @created     = data[:created_at]
-    @updated     = data[:updated_at]
+    @created     = Date.parse(data[:created_at])
+    @updated     = Date.parse(data[:updated_at])
     @result      = data[:result]
     @repo        = repo
   end

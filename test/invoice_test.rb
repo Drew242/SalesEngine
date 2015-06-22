@@ -39,7 +39,7 @@ class InvoiceTest < Minitest::Test
     status:"shipped",
     created_at:"2012-03-25 09:54:09 UTC",
     updated_at:"2012-03-25 09:54:09 UTC"}, "repo")
-    assert_equal "2012-03-25 09:54:09 UTC", invoice.created
+    assert_equal Date.parse("2012-03-25 09:54:09 UTC"), invoice.created
   end
 
   def test_id_has_an_updated_at_date
@@ -47,12 +47,13 @@ class InvoiceTest < Minitest::Test
     status:"shipped",
     created_at:"2012-03-25 09:54:09 UTC",
     updated_at:"2012-03-25 09:54:09 UTC"}, "repo")
-    assert_equal "2012-03-25 09:54:09 UTC", invoice.updated
+    assert_equal Date.parse("2012-03-25 09:54:09 UTC"), invoice.updated
   end
 
   def test_it_can_move_instances_up_to_its_repo_for_transactions
     repo = Minitest::Mock.new
-    invoice = Invoice.new({id: 2, name: "Joe"}, repo)
+    invoice = Invoice.new({id: 2, name: "Joe",  created_at: "2012-03-26 09:54:09 UTC",
+                          updated_at: "2012-03-26 09:54:09 UTC"}, repo)
     repo.expect(:find_all_transactions_by_invoice_id, [], [invoice.id])
     invoice.transactions
     repo.verify
@@ -60,7 +61,8 @@ class InvoiceTest < Minitest::Test
 
   def test_it_can_move_instances_up_to_its_repo_for_invoice_items
     repo = Minitest::Mock.new
-    invoice = Invoice.new({id: 2, name: "Joe"}, repo)
+    invoice = Invoice.new({id: 2, name: "Joe",  created_at: "2012-03-26 09:54:09 UTC",
+                          updated_at: "2012-03-26 09:54:09 UTC"}, repo)
     repo.expect(:find_all_invoice_items_by_invoice_id, [], [invoice.id])
     invoice.invoice_items
     repo.verify
@@ -68,7 +70,8 @@ class InvoiceTest < Minitest::Test
 
   def test_it_can_move_instances_up_to_its_repo_for_items
     repo = Minitest::Mock.new
-    invoice = Invoice.new({id: 2, name: "Joe"}, repo)
+    invoice = Invoice.new({id: 2, name: "Joe",  created_at: "2012-03-26 09:54:09 UTC",
+                          updated_at: "2012-03-26 09:54:09 UTC"}, repo)
     repo.expect(:find_all_items_by_invoice_id, [], [invoice.id])
     invoice.items
     repo.verify
@@ -76,7 +79,8 @@ class InvoiceTest < Minitest::Test
 
   def test_it_can_move_instances_up_to_its_repo_for_a_customer
     repo = Minitest::Mock.new
-    invoice = Invoice.new({id: 2, name: "Joe", customer_id: "2"}, repo)
+    invoice = Invoice.new({id: 2, name: "Joe", customer_id: "2",  created_at: "2012-03-26 09:54:09 UTC",
+                          updated_at: "2012-03-26 09:54:09 UTC"}, repo)
     repo.expect(:find_a_customer_by_invoice_id, [], [invoice.customer_id])
     invoice.customer
     repo.verify
@@ -84,7 +88,9 @@ class InvoiceTest < Minitest::Test
 
   def test_it_can_move_instances_up_to_its_repo_for_a_merchant
     repo = Minitest::Mock.new
-    invoice = Invoice.new({id: 2, name: "Joe", merchant_id: "5"}, repo)
+    invoice = Invoice.new({id: 2, name: "Joe", merchant_id: "5",
+                          created_at: "2012-03-26 09:54:09 UTC",
+                          updated_at: "2012-03-26 09:54:09 UTC"}, repo)
     repo.expect(:find_a_merchant_by_invoice_id, [], [invoice.merchant_id])
     invoice.merchant
     repo.verify

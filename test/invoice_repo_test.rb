@@ -112,7 +112,8 @@ class InvoiceRepoTest < Minitest::Test
 
   def test_it_can_move_instances_up_to_its_sales_engine_for_invoice_items
     engine = Minitest::Mock.new
-    invoice_repo = InvoiceRepository.new([{id: 2, name: "Joe"}], engine)
+    invoice_repo = InvoiceRepository.new([{id: 2, name: "Joe",  created_at: "2012-03-26 09:54:09 UTC",
+                                        updated_at: "2012-03-26 09:54:09 UTC"}], engine)
     engine.expect(:find_all_invoice_items_by_invoice_id, [], [2])
     invoice_repo.find_all_invoice_items_by_invoice_id(2)
     engine.verify
@@ -120,7 +121,8 @@ class InvoiceRepoTest < Minitest::Test
 
   def test_it_can_move_instances_up_to_its_sales_engine_for_transactions
     engine = Minitest::Mock.new
-    invoice_repo = InvoiceRepository.new([{id: 2, name: "Joe"}], engine)
+    invoice_repo = InvoiceRepository.new([{id: 2, name: "Joe", created_at: "2012-03-26 09:54:09 UTC",
+                                      updated_at: "2012-03-26 09:54:09 UTC"}], engine)
     engine.expect(:find_all_transactions_by_invoice_id, [], [2])
     invoice_repo.find_all_transactions_by_invoice_id(2)
     engine.verify
@@ -128,7 +130,8 @@ class InvoiceRepoTest < Minitest::Test
 
   def test_it_can_move_instances_up_to_its_sales_engine_for_items
     engine = Minitest::Mock.new
-    invoice_repo = InvoiceRepository.new([{id: 2, name: "Joe"}], engine)
+    invoice_repo = InvoiceRepository.new([{id: 2, name: "Joe",  created_at: "2012-03-26 09:54:09 UTC",
+                                          updated_at: "2012-03-26 09:54:09 UTC"}], engine)
     engine.expect(:find_all_items_by_invoice_id, [], [2])
     invoice_repo.find_all_items_by_invoice_id(2)
     engine.verify
@@ -136,7 +139,8 @@ class InvoiceRepoTest < Minitest::Test
 
   def test_it_can_move_instances_up_to_its_sales_engine_for_a_customer
     engine = Minitest::Mock.new
-    invoice_repo = InvoiceRepository.new([{id: 2, name: "Joe"}], engine)
+    invoice_repo = InvoiceRepository.new([{id: 2, name: "Joe",  created_at: "2012-03-26 09:54:09 UTC",
+                                          updated_at: "2012-03-26 09:54:09 UTC"}], engine)
     engine.expect(:find_a_customer_by_invoice_id, [], [2])
     invoice_repo.find_a_customer_by_invoice_id(2)
     engine.verify
@@ -144,15 +148,18 @@ class InvoiceRepoTest < Minitest::Test
 
   def test_it_can_move_instances_up_to_its_sales_engine_for_a_merchant
     engine = Minitest::Mock.new
-    invoice_repo = InvoiceRepository.new([{id: 2, name: "Joe"}], engine)
+    invoice_repo = InvoiceRepository.new([{id: 2, name: "Joe",  created_at: "2012-03-26 09:54:09 UTC",
+                                          updated_at: "2012-03-26 09:54:09 UTC"}], engine)
     engine.expect(:find_a_merchant_by_invoice_id, [], [2])
     invoice_repo.find_a_merchant_by_invoice_id(2)
     engine.verify
   end
 
   def test_it_can_find_all_by_customer_id
-    repo = InvoiceRepository.new([{customer_id: 2, status: "shipped"},
-                                 {customer_id: 1}], "sales_engine")
+    repo = InvoiceRepository.new([{customer_id: 2, status: "shipped",  created_at: "2012-03-26 09:54:09 UTC",
+                                  updated_at: "2012-03-26 09:54:09 UTC"},
+                                 {customer_id: 1,  created_at: "2012-03-26 09:54:09 UTC",
+                                   updated_at: "2012-03-26 09:54:09 UTC"}], "sales_engine")
     result = repo.find_all_by_customer_id(2)
     assert_equal 1, result.size
   end

@@ -88,7 +88,8 @@ class ItemsRepoTest < Minitest::Test
 
   def test_it_can_move_instances_up_to_its_sales_engine_for_invoice_items
     engine = Minitest::Mock.new
-    repo = ItemsRepository.new([{id: 2, name: "Joe", unit_price: "1234"}], engine)
+    repo = ItemsRepository.new([{id: 2, name: "Joe", unit_price: "1234",  created_at: "2012-03-26 09:54:09 UTC",
+                              updated_at: "2012-03-26 09:54:09 UTC"}], engine)
     engine.expect(:find_invoice_items_by_item_id, [], [2])
     repo.find_invoice_items_by_item_id(2)
     engine.verify
@@ -96,7 +97,8 @@ class ItemsRepoTest < Minitest::Test
 
   def test_it_can_move_instances_up_to_its_sales_engine_for_merchant
     engine = Minitest::Mock.new
-    repo = ItemsRepository.new([{id: 2, name: "Joe", unit_price: "1234"}], engine)
+    repo = ItemsRepository.new([{id: 2, name: "Joe", unit_price: "1234", created_at: "2012-03-26 09:54:09 UTC",
+                                updated_at: "2012-03-26 09:54:09 UTC"}], engine)
     engine.expect(:find_merchant_by_merchant_id, [], [2])
     repo.find_merchant_by_merchant_id(2)
     engine.verify

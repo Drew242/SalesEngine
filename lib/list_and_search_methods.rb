@@ -40,7 +40,7 @@ module ListSearch
 
   def find_by_created_at(date)
     instances.select do |instance|
-      if instance.created == date
+      if instance.created == Date.parse(date)
         return instance
       end
     end
@@ -49,7 +49,7 @@ module ListSearch
 
   def find_by_updated_at(date)
     instances.select do |instance|
-      if instance.updated == date
+      if instance.updated == Date.parse(date)
         return instance
       end
     end
@@ -70,7 +70,7 @@ module ListSearch
 
     result =[]
     instances.select do |instance|
-      if instance.created == created_at
+      if instance.created == Date.parse(created_at)
         result << instance
       end
     end
@@ -80,7 +80,7 @@ module ListSearch
   def find_all_by_updated_at(updated_at)
     result =[]
     instances.select do |instance|
-      if instance.updated == updated_at
+      if instance.updated == Date.parse(updated_at)
         result << instance
       end
     end

@@ -13,7 +13,10 @@ class MerchantRepoTest < Minitest::Test
   end
 
   def test_it_can_return_correct_size
-    repo = MerchantRepository.new([{id: 2, name: "Joe"}, {id: 1, name: "Jim"}], "sales_engine")
+    repo = MerchantRepository.new([{id: 2, name: "Joe",  created_at: "2012-03-26 09:54:09 UTC",
+                                  updated_at: "2012-03-26 09:54:09 UTC"},
+                                  {id: 1, name: "Jim",  created_at: "2012-03-26 09:54:09 UTC",
+                                  updated_at: "2012-03-26 09:54:09 UTC"}], "sales_engine")
     result = repo.all
     assert_equal  2 , result.size
 
@@ -62,7 +65,7 @@ class MerchantRepoTest < Minitest::Test
     data = FileReader.new.read(@file)
     repo = MerchantRepository.new(data, "sales_engine")
     result = repo.find_by_updated_at("2012-03-27 16:12:25 UTC")
-    assert_equal 6, result.id
+    assert_equal 1, result.id
   end
 
   def test_it_can_find_all_instances_based_off_of_first_name
@@ -100,13 +103,15 @@ class MerchantRepoTest < Minitest::Test
     data = FileReader.new.read(@file)
     repo = MerchantRepository.new(data, "sales_engine")
     result = repo.find_all_by_updated_at("2012-03-27 14:53:59 UTC")
-    assert_equal 5, result.size
+    assert_equal 6, result.size
   end
 
   def test_it_can_move_instances_up_to_its_sales_engine_for_items_search
     engine = Minitest::Mock.new
-    repo = MerchantRepository.new([{id: 2, name: "Joe"},
-      {id: 1, name: "Jim"}], engine)
+    repo = MerchantRepository.new([{id: 2, name: "Joe", created_at: "2012-03-26 09:54:09 UTC",
+                                  updated_at: "2012-03-26 09:54:09 UTC"},
+                                  {id: 1, name: "Jim", created_at: "2012-03-26 09:54:09 UTC",
+                                    updated_at: "2012-03-26 09:54:09 UTC"}], engine)
       engine.expect(:find_all_items_by_merchant_id, [], [2])
       repo.find_all_items_by_merchant_id(2)
       engine.verify
@@ -114,8 +119,10 @@ class MerchantRepoTest < Minitest::Test
 
     def test_it_can_move_instances_up_to_its_sales_engine_for_invoices_search
       engine = Minitest::Mock.new
-      repo = MerchantRepository.new([{id: 2, name: "Joe"},
-        {id: 1, name: "Jim"}] , engine)
+      repo = MerchantRepository.new([{id: 2, name: "Joe",  created_at: "2012-03-26 09:54:09 UTC",
+                                    updated_at: "2012-03-26 09:54:09 UTC"},
+                                  {id: 1, name: "Jim",  created_at: "2012-03-26 09:54:09 UTC",
+                                  updated_at: "2012-03-26 09:54:09 UTC"}] , engine)
         engine.expect(:find_all_invoices_by_merchant_id, [], [2])
         repo.find_all_invoices_by_merchant_id(2)
         engine.verify

@@ -14,8 +14,8 @@ class Item
     @description = data[:description]
     @price       = BigDecimal.new(data[:unit_price].insert(-3, "."))
     @merchant_id = data[:merchant_id].to_i
-    @created     = data[:created_at]
-    @updated     = data[:updated_at]
+    @created     = Date.parse(data[:created_at])
+    @updated     = Date.parse(data[:updated_at])
     @repo        = repo
   end
 

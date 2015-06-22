@@ -6,8 +6,8 @@ class Merchant
   def initialize(data, repo)
     @id      = data[:id].to_i
     @name    = data[:name]
-    @created = data[:created_at]
-    @updated = data[:updated_at]
+    @created = Date.parse(data[:created_at])
+    @updated = Date.parse(data[:updated_at])
     @repo    = repo
   end
 
@@ -27,8 +27,8 @@ class Merchant
     @invoices ||= @repo.find_all_invoices_by_merchant_id(id)
   end
 
-  def revenue
-    ii = get_invoice_items
+  def revenue(date = nil)
+    ii = get_invoice_items(date)
     revenue = 0
     ii.compact.each do |invoice_item|
       revenue += (invoice_item.price * invoice_item.quantity)
@@ -36,8 +36,21 @@ class Merchant
     revenue
   end
 
-  def get_invoice_items
-    return invoices.map do |invoice|
+  def parse_date(date)
+    return invoices.select do |invoice|
+      if date.nil?
+        invoice
+      else
+        invoice.created.strftime("%Y-%m-%d") == date.strftime("%Y-%m-%d")
+        require 'pry'
+        binding.pry
+      end
+    end
+  end
+
+  def get_invoice_items(date)
+    invoices_array = parse_date(date)
+    return invoices_array.map do |invoice|
       invoice.transactions.map do |transaction|
         if transaction.result == "success"
           invoice.invoice_items

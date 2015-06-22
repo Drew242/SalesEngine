@@ -14,8 +14,8 @@ class InvoiceItem
     @invoice_id  = data[:invoice_id].to_i
     @quantity    = data[:quantity].to_i
     @price       = BigDecimal.new(data[:unit_price].insert(-3, "."))
-    @created     = data[:created_at]
-    @updated     = data[:updated_at]
+    @created     = Date.parse(data[:created_at])
+    @updated     = Date.parse(data[:updated_at])
     @repo        = repo
   end
 

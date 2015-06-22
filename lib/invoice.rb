@@ -13,8 +13,8 @@ class Invoice
     @customer_id = data[:customer_id].to_i
     @merchant_id = data[:merchant_id].to_i
     @status      = data[:status]
-    @created     = data[:created_at]
-    @updated     = data[:updated_at]
+    @created     = Date.parse(data[:created_at])
+    @updated     = Date.parse(data[:updated_at])
     @repo        = repo
   end
 
