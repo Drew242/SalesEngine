@@ -124,11 +124,14 @@ class MerchantRepoTest < Minitest::Test
       def test_it_finds_most_items_by_merchant_id
         engine     = SalesEngine.new
         data       = FileReader.new.read(@file)
-        item_data  = FileReader.new.read(File.expand_path("../test/fixtures/items.csv", __dir__))
+        i_data     = FileReader.new.read(File.expand_path("../test/fixtures/invoices.csv", __dir__))
+        t_data     = FileReader.new.read(File.expand_path("../test/fixtures/transactions.csv", __dir__))
         repo       = MerchantRepository.new(data, engine)
         invoice_item_data = FileReader.new.read(File.expand_path("../test/fixtures/invoice_items.csv", __dir__))
-        engine.item_repository = ItemsRepository.new(item_data, engine)
+        engine.invoice_repository = InvoiceRepository.new(i_data, engine)
+        engine.transaction_repository = TransactionRepository.new(t_data, engine)
         engine.invoice_item_repository = InvoiceItemsRepository.new(invoice_item_data, engine)
+        engine.merchant_repository = repo
         result = repo.most_items(2)
         assert_equal 1, result[1].id
       end

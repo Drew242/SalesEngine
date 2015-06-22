@@ -17,7 +17,7 @@ class InvoiceItemsRepoTest < Minitest::Test
     data = FileReader.new.read(@file)
     repo = InvoiceItemsRepository.new(data, "sales_engine")
     result = repo.all
-    assert_equal  6 , result.size
+    assert_equal  8 , result.size
 
   end
 
@@ -60,7 +60,7 @@ class InvoiceItemsRepoTest < Minitest::Test
     repo = InvoiceItemsRepository.new(data, "sales_engine")
     invoice_items = repo.manage
     result = repo.find_all_by_quantity(5)
-    assert_equal 2 , result.size
+    assert_equal 3 , result.size
   end
 
   def test_it_can_find_all_instances_based_off_of_unit_price
@@ -68,7 +68,7 @@ class InvoiceItemsRepoTest < Minitest::Test
     repo = InvoiceItemsRepository.new(data, "sales_engine")
     invoice_items = repo.manage
     result = repo.find_all_by_unit_price(BigDecimal.new("136.35"))
-    assert_equal 3 , result.size
+    assert_equal 4 , result.size
   end
 
   def test_it_can_find_an_instance_based_off_of_unit_price
@@ -85,7 +85,7 @@ class InvoiceItemsRepoTest < Minitest::Test
     repo = InvoiceItemsRepository.new(data, "sales_engine")
     invoice_items = repo.manage
     result = repo.find_by_invoice_id(8)
-    assert_equal 9 , result.quantity
+    assert_equal 5 , result.quantity
   end
 
   def test_it_can_find_all_instances_based_off_of_invoice_id
@@ -93,7 +93,7 @@ class InvoiceItemsRepoTest < Minitest::Test
     repo = InvoiceItemsRepository.new(data, "sales_engine")
     invoice_items = repo.manage
     result = repo.find_all_by_invoice_id(1)
-    assert_equal 5 , result.size
+    assert_equal 1 , result.size
   end
 
   def test_it_can_find_an_instance_based_off_of_created_at
@@ -127,7 +127,7 @@ class InvoiceItemsRepoTest < Minitest::Test
     repo = InvoiceItemsRepository.new(data, "sales_engine")
     invoice_items = repo.manage
     result = repo.find_all_by_created_at("2012-03-27 14:54:09 UTC")
-    assert_equal 6, result.size
+    assert_equal 8, result.size
   end
 
   def test_it_can_find_all_instances_based_off_of_updated_at
@@ -135,7 +135,7 @@ class InvoiceItemsRepoTest < Minitest::Test
     repo = InvoiceItemsRepository.new(data, "sales_engine")
     invoice_items = repo.manage
     result = repo.find_all_by_updated_at("2012-03-27 14:54:09 UTC")
-    assert_equal 6, result.size
+    assert_equal 8, result.size
   end
 
   def test_it_can_move_instances_up_to_its_sales_engine_for_items
