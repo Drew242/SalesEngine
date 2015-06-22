@@ -16,7 +16,7 @@ class ItemsRepoTest < Minitest::Test
     data = FileReader.new.read(@file)
     repo = ItemsRepository.new(data, "sales_engine")
     result = repo.all
-    assert_equal  5 , result.size
+    assert_equal  10 , result.size
   end
 
   def test_it_returns_all_items

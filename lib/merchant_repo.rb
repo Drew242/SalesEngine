@@ -31,22 +31,33 @@ class MerchantRepository
   end
 
   def most_items(num_of_top_merchants)
-    items = @instances.map do |merchant|
-      find_all_items_by_merchant_id(merchant.id)
-    end
-    items.sort! do |a, b|
-      b.length <=> a.length
-    end
-    merchants = items.take(num_of_top_merchants).map do |item|
-      find_by_id(item[0].merchant_id)
+    merchants = @instances.max(num_of_top_merchants) do |merchant, merchant2|
+      find_quantity(merchant) <=> find_quantity(merchant2)
     end
   end
 
-  def most_revenue(num_of_top_merchants)
-    revenue = @instances.sort do |a, b|
-      b.revenue <=> a.revenue
+  def find_quantity(merchant)
+    if merchant
+      invoices = merchant.invoices
+      total = invoices.map do |invoice|
+        invoice.transactions.map do |transaction|
+          if transaction.result == "success"
+            ii = invoice.invoice_items
+          end
+        end
+      end.flatten
+      quantities = total.compact.map do |invoice_item|
+        invoice_item.quantity
+      end
+      quantities.reduce(:+)
     end
-    return revenue.take(num_of_top_merchants)
+  end
+
+
+  def most_revenue(num_of_top_merchants)
+    return @instances.max(num_of_top_merchants) do |a, b|
+      a.revenue <=> b.revenue
+    end
   end
 
 end

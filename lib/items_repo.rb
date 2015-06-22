@@ -40,5 +40,14 @@ class ItemsRepository
     @sales_engine.find_merchant_by_merchant_id(instance)
   end
 
+  def find_all_by_item_id(id)
+    result =[]
+    instances.select do |instance|
+      if instance.item_id == id
+        result << instance
+      end
+    end
+    return result
+  end
 
 end
