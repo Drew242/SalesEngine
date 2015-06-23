@@ -36,14 +36,13 @@ class Merchant
     revenue
   end
 
+
   def parse_date(date)
     return invoices.select do |invoice|
       if date.nil?
         invoice
       else
         invoice.created.strftime("%Y-%m-%d") == date.strftime("%Y-%m-%d")
-        require 'pry'
-        binding.pry
       end
     end
   end
@@ -58,5 +57,24 @@ class Merchant
       end
     end.flatten
   end
+
+  def favorite_customer
+    grouped = invoices.group_by do |invoice|
+      invoice.customer
+    end.values
+    top = grouped.max_by do |customer_invoices|
+      customer_invoices.reduce(0) do |total, invoice|
+        total += get_successful_transactions(invoice).size
+      end
+    end
+    top[0].customer
+  end
+
+  def get_successful_transactions(invoice)
+    invoice.transactions.select do|transaction|
+      transaction.result == "success"
+    end
+  end
+
 
 end

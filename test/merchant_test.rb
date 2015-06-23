@@ -54,10 +54,10 @@ class MerchantTest < Minitest::Test
   def test_revenue_will_return_merchant_revenue
     engine   = SalesEngine.new
     repo     = MerchantRepository.new([{id:"1", name:"Jim",
-                            created_at: "2012-03-25 09:54:09 UTC",
-                            updated_at: "2012-03-25 09:54:09 UTC"}],engine)
-    engine.invoice_repository = InvoiceRepository.new([{merchant_id: 1, id: 2,  created_at: "2012-03-26 09:54:09 UTC",
-                                                      updated_at: "2012-03-26 09:54:09 UTC"}], engine)
+                                   created_at: "2012-03-25 09:54:09 UTC",
+                                   updated_at: "2012-03-25 09:54:09 UTC"}],engine)
+    engine.invoice_repository      = InvoiceRepository.new([{merchant_id: 1, id: 2,  created_at: "2012-03-26 09:54:09 UTC",
+                                                            updated_at: "2012-03-26 09:54:09 UTC"}], engine)
     engine.invoice_item_repository = InvoiceItemsRepository.new([{id:25, invoice_id: 2, unit_price: "300", created_at: "2012-03-26 09:54:09 UTC",
                                                             updated_at: "2012-03-26 09:54:09 UTC", quantity: 3}], engine)
     engine.transaction_repository  = TransactionRepository.new([{id: 1, invoice_id: 2, result: "success", created_at: "2012-03-26 09:54:09 UTC",
@@ -69,31 +69,47 @@ class MerchantTest < Minitest::Test
   end
 
   def test_revenue_will_return_merchant_revenue_from_specified_date
-    skip
     engine   = SalesEngine.new
     repo     = MerchantRepository.new([{id:"1", name:"Jim",
-                                        created_at: "2012-03-25 09:54:09 UTC",
-                                        updated_at: "2012-03-25 09:54:09 UTC"},
-                                        {id:"3", name:"Jim",
-                                        created_at: "2012-03-25 09:54:09 UTC",
-                                        updated_at: "2012-04-25 09:54:09 UTC"}],engine)
+                                    created_at: "2012-03-25 09:54:09 UTC",
+                                    updated_at: "2012-03-25 09:54:09 UTC"},
+                                    {id:"3", name:"Jim",
+                                    created_at: "2012-08-25 09:54:09 UTC",
+                                    updated_at: "2012-04-25 09:54:09 UTC"}],engine)
     engine.invoice_repository      = InvoiceRepository.new([{merchant_id: 1, id: 2, created_at: "2012-03-25 09:54:09 UTC",
                                     updated_at: "2012-04-25 09:54:09 UTC"},
-                                    {merchant_id: 1, id: 3, created_at: "2012-03-25 09:54:09 UTC",
+                                    {merchant_id: 1, id: 3, created_at: "2012-08-25 09:54:09 UTC",
                                       updated_at: "2012-04-25 09:54:09 UTC"}], engine)
     engine.invoice_item_repository = InvoiceItemsRepository.new([{id:25, invoice_id: 2, unit_price: "300",
-                                    quantity: 3,  created_at: "2012-03-25 09:54:09 UTC",
+                                    quantity: 3,  created_at: "2012-08-25 09:54:09 UTC",
                                     updated_at: "2012-04-25 09:54:09 UTC"},
                                     {id:29, invoice_id: 3, unit_price: "900",
-                                    quantity: 3,  created_at: "2012-03-25 09:54:09 UTC",
+                                    quantity: 3,  created_at: "2012-08-25 09:54:09 UTC",
                                     updated_at: "2012-04-25 09:54:09 UTC"} ], engine)
     engine.transaction_repository  = TransactionRepository.new([{id: 1, invoice_id: 2, result: "success",  created_at: "2012-03-25 09:54:09 UTC",
-                                                                updated_at: "2012-04-25 09:54:09 UTC"},
-                                                              {id: 1, invoice_id: 3, result: "success",  created_at: "2012-03-25 09:54:09 UTC",
-                                                                updated_at: "2012-04-25 09:54:09 UTC"}  ], engine)
+                                    updated_at: "2012-04-25 09:54:09 UTC"},
+                                    {id: 1, invoice_id: 3, result: "success",  created_at: "2012-08-25 09:54:09 UTC",
+                                    updated_at: "2012-04-25 09:54:09 UTC"}  ], engine)
     engine.merchant_repository     = repo
     merchant = repo.find_by_id(1)
-    assert_equal 9.00, merchant.revenue("2012-03-25 09:54:09 UTC").to_f
+    assert_equal 9.00, merchant.revenue(Date.parse("2012-03-25 09:54:09 UTC")).to_f
+  end
+
+  def test_favorite_customer_will_return_customer_with_most_successful_transactions
+    engine = SalesEngine.new
+    reader = FileReader.new
+    repo   = MerchantRepository.new(reader.read(File.expand_path("../test/fixtures/merchants.csv", __dir__)),
+                                      engine)
+    engine.invoice_repository  = InvoiceRepository.new(reader.read(File.expand_path("../test/fixtures/invoices.csv", __dir__)),
+                                      engine)
+    engine.customer_repository = CustomerRepository.new(reader.read(File.expand_path("../test/fixtures/customers.csv", __dir__)),
+                                      engine)
+    engine.transaction_repository = TransactionRepository.new(reader.read(File.expand_path("../test/fixtures/transactions.csv", __dir__)),
+                                      engine)
+    engine.merchant_repository    = repo
+
+    merchant = repo.find_by_id(1)
+    assert_equal "Joey", merchant.favorite_customer.first_name
   end
 
 end

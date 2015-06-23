@@ -59,4 +59,12 @@ class MerchantRepository
     end
   end
 
+  def revenue(date)
+    return @instances.reduce(0) do |result, merchant|
+       result += merchant.revenue(date)
+       result
+    end
+  end
+
+
 end
