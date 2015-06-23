@@ -112,4 +112,21 @@ class MerchantTest < Minitest::Test
     assert_equal "Joey", merchant.favorite_customer.first_name
   end
 
+  def test_customers_with_pending_invoices_returns_collection_of_customers_pending_invoices
+    engine = SalesEngine.new
+    reader = FileReader.new
+    repo   = MerchantRepository.new(reader.read(File.expand_path("../test/fixtures/merchants.csv", __dir__)),
+                                      engine)
+    engine.invoice_repository  = InvoiceRepository.new(reader.read(File.expand_path("../test/fixtures/invoices.csv", __dir__)),
+                                      engine)
+    engine.customer_repository = CustomerRepository.new(reader.read(File.expand_path("../test/fixtures/customers.csv", __dir__)),
+                                      engine)
+    engine.transaction_repository = TransactionRepository.new(reader.read(File.expand_path("../test/fixtures/transactions.csv", __dir__)),
+                                      engine)
+    engine.merchant_repository    = repo
+
+    merchant = repo.find_by_id(6)
+    assert_equal "Mariah", merchant.customers_with_pending_invoices[0].first_name
+  end
+
 end

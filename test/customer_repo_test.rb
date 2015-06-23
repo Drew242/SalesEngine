@@ -16,7 +16,7 @@ class CustomerRepoTest < Minitest::Test
     data = FileReader.new.read(@file)
     repo = CustomerRepository.new(data, "sales_engine")
     result = repo.all
-    assert_equal  6 , result.size
+    assert_equal  12 , result.size
 
   end
 

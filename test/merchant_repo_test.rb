@@ -96,14 +96,14 @@ class MerchantRepoTest < Minitest::Test
     data = FileReader.new.read(@file)
     repo = MerchantRepository.new(data, "sales_engine")
     result = repo.find_all_by_created_at("2012-03-27 14:53:59 UTC")
-    assert_equal 6, result.size
+    assert_equal 8, result.size
   end
 
   def test_it_can_find_all_instances_based_off_of_updated_at
     data = FileReader.new.read(@file)
     repo = MerchantRepository.new(data, "sales_engine")
     result = repo.find_all_by_updated_at("2012-03-27 14:53:59 UTC")
-    assert_equal 6, result.size
+    assert_equal 8, result.size
   end
 
   def test_it_can_move_instances_up_to_its_sales_engine_for_items_search
@@ -140,7 +140,7 @@ class MerchantRepoTest < Minitest::Test
         engine.invoice_item_repository = InvoiceItemsRepository.new(invoice_item_data, engine)
         engine.merchant_repository = repo
         result = repo.most_items(2)
-        assert_equal 5, result[1].id
+        assert_equal 4, result[1].id
       end
 
       def test_most_revenue_will_return_top_merchants_by_total_revenue

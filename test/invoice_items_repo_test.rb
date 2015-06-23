@@ -17,7 +17,7 @@ class InvoiceItemsRepoTest < Minitest::Test
     data = FileReader.new.read(@file)
     repo = InvoiceItemsRepository.new(data, "sales_engine")
     result = repo.all
-    assert_equal  8 , result.size
+    assert_equal  13 , result.size
 
   end
 
@@ -127,7 +127,7 @@ class InvoiceItemsRepoTest < Minitest::Test
     repo = InvoiceItemsRepository.new(data, "sales_engine")
     invoice_items = repo.manage
     result = repo.find_all_by_created_at("2012-03-27 14:54:09 UTC")
-    assert_equal 8, result.size
+    assert_equal 13, result.size
   end
 
   def test_it_can_find_all_instances_based_off_of_updated_at
@@ -135,7 +135,7 @@ class InvoiceItemsRepoTest < Minitest::Test
     repo = InvoiceItemsRepository.new(data, "sales_engine")
     invoice_items = repo.manage
     result = repo.find_all_by_updated_at("2012-03-27 14:54:09 UTC")
-    assert_equal 8, result.size
+    assert_equal 13, result.size
   end
 
   def test_it_can_move_instances_up_to_its_sales_engine_for_items

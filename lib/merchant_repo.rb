@@ -31,7 +31,7 @@ class MerchantRepository
   end
 
   def most_items(num_of_top_merchants)
-    return  @instances.max(num_of_top_merchants) do |merchant, merchant2|
+    return  all.max(num_of_top_merchants) do |merchant, merchant2|
       find_quantity(merchant) <=> find_quantity(merchant2)
     end
   end
@@ -54,13 +54,13 @@ class MerchantRepository
 
 
   def most_revenue(num_of_top_merchants)
-    return @instances.max(num_of_top_merchants) do |a, b|
+    return all.max(num_of_top_merchants) do |a, b|
       a.revenue <=> b.revenue
     end
   end
 
   def revenue(date)
-    return @instances.reduce(0) do |result, merchant|
+    return all.reduce(0) do |result, merchant|
        result += merchant.revenue(date)
        result
     end

@@ -59,15 +59,17 @@ class Merchant
   end
 
   def favorite_customer
-    grouped = invoices.group_by do |invoice|
-      invoice.customer
-    end.values
-    top = grouped.max_by do |customer_invoices|
+    grouped = group_invoices_by_customers
+    top = find_most_successful_customer(grouped)
+    top[0].customer
+  end
+
+  def find_most_successful_customer(grouped)
+    grouped.max_by do |customer_invoices|
       customer_invoices.reduce(0) do |total, invoice|
         total += get_successful_transactions(invoice).size
       end
     end
-    top[0].customer
   end
 
   def get_successful_transactions(invoice)
@@ -76,5 +78,32 @@ class Merchant
     end
   end
 
+  def customers_with_pending_invoices
+    grouped = group_invoices_by_customers
+    failing = grouped.map do |customers_invoices|
+      customers_invoices.select do |i|
+        if i.transactions == find_failing_transactions(i)
+          i
+        end
+      end
+    end
+    failing.flatten.map do |invoice|
+        invoice.customer
+    end
+  end
 
+
+  def find_failing_transactions(invoice)
+    invoice.transactions.select do |transaction|
+      if transaction.result == "failed"
+        transaction
+      end
+    end
+  end
+
+  def group_invoices_by_customers
+    return invoices.group_by do |invoice|
+      invoice.customer
+    end.values
+  end
 end

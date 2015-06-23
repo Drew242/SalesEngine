@@ -16,7 +16,7 @@ class InvoiceRepoTest < Minitest::Test
     data = FileReader.new.read(@file)
     repo = InvoiceRepository.new(data, "sales_engine")
     result = repo.all
-    assert_equal  8 , result.size
+    assert_equal  12 , result.size
 
   end
 
@@ -70,7 +70,7 @@ class InvoiceRepoTest < Minitest::Test
     data = FileReader.new.read(@file)
     repo = InvoiceRepository.new(data, "sales_engine")
     result = repo.find_all_by_status("ShiPped")
-    assert_equal 8, result.size
+    assert_equal 12, result.size
   end
 
   def test_it_can_find_an_instance_based_off_of_created_at
