@@ -74,14 +74,14 @@ class TransactionRepoTest < Minitest::Test
     data = FileReader.new.read(@file)
     repo = TransactionRepository.new(data, "sales_engine")
     result = repo.find_all_by_created_at("2012-03-27 14:54:09 UTC")
-    assert_equal 11, result.size
+    assert_equal 12, result.size
   end
 
   def test_it_can_find_all_instances_based_off_of_updated_at
     data = FileReader.new.read(@file)
     repo = TransactionRepository.new(data, "sales_engine")
     result = repo.find_all_by_updated_at("2012-03-27 14:54:09 UTC")
-    assert_equal 11, result.size
+    assert_equal 12, result.size
   end
 
   def test_it_can_find_all_instances_based_off_of_result

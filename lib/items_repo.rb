@@ -75,11 +75,32 @@ class ItemsRepository
         end
       end
     end.flatten
+
   end
 
   def get_successful_transactions(invoice)
     invoice.transactions.select do|transaction|
       transaction.result == "success"
+    end
+  end
+
+  def most_items(num_of_top_items)
+    return  all.max_by(num_of_top_items) do |item|
+      find_quantity(item)
+    end
+  end
+
+  def find_quantity(item)
+    total = get_invoice_items(item)
+    quantities = total.compact.map do |invoice_item|
+      if invoice_item
+        invoice_item.quantity
+      end
+    end
+    if quantities.reduce(:+)
+      return quantities.reduce(:+)
+    else
+      0
     end
   end
 

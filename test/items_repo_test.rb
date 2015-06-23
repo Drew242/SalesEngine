@@ -116,7 +116,22 @@ class ItemsRepoTest < Minitest::Test
     transaction_data               = reader.read(File.expand_path("../test/fixtures/transactions.csv", __dir__))
     engine.transaction_repository  = TransactionRepository.new(transaction_data, engine)
     engine.item_repository         = repo
-    assert_equal "Item Ea Voluptatum", repo.most_revenue(1)[0].name
+    assert_equal "Item Qui Esse", repo.most_revenue(1)[0].name
+  end
+
+  def test_most_items_will_return_top_items_sold
+    reader = FileReader.new
+    data                           = reader.read(@file)
+    engine                         = SalesEngine.new
+    repo                           = ItemsRepository.new(data, engine)
+    invoice_data                   = reader.read(File.expand_path("../test/fixtures/invoices.csv", __dir__))
+    engine.invoice_repository      = InvoiceRepository.new(invoice_data, engine)
+    invoice_items_data             = reader.read(File.expand_path("../test/fixtures/invoice_items.csv", __dir__))
+    engine.invoice_item_repository = InvoiceItemsRepository.new(invoice_items_data, engine)
+    transaction_data               = reader.read(File.expand_path("../test/fixtures/transactions.csv", __dir__))
+    engine.transaction_repository  = TransactionRepository.new(transaction_data, engine)
+    engine.item_repository         = repo
+    assert_equal "Item Qui Esse", repo.most_items(1)[0].name
   end
 
 

@@ -76,7 +76,7 @@ class InvoiceItemsRepoTest < Minitest::Test
     repo = InvoiceItemsRepository.new(data, "sales_engine")
     invoice_items = repo.manage
     result = repo.find_by_unit_price(BigDecimal.new("233.24"))
-    assert_equal 528 , result.item_id
+    assert_equal 2 , result.item_id
   end
 
 
