@@ -50,4 +50,37 @@ class ItemsRepository
     return result
   end
 
+
+  def most_revenue(num_of_items)
+    return all.max(num_of_items) do |a, b|
+      revenue(a) <=> revenue(b)
+    end
+  end
+
+  def revenue(item)
+    ii = get_invoice_items(item)
+    revenue = 0
+    ii.compact.each do |invoice_item|
+      revenue += (invoice_item.price * invoice_item.quantity)
+    end
+    revenue
+  end
+
+  def get_invoice_items(item)
+    invoice_items_array = item.invoice_items
+    return invoice_items_array.map do |invoice_item|
+      invoice_item.invoice.transactions.map do |transaction|
+        if transaction.result == "success"
+          invoice_item
+        end
+      end
+    end.flatten
+  end
+
+  def get_successful_transactions(invoice)
+    invoice.transactions.select do|transaction|
+      transaction.result == "success"
+    end
+  end
+
 end
