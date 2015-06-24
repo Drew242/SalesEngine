@@ -27,7 +27,7 @@ class Invoice
   end
 
   def transactions
-    @transactions = @repo.find_all_transactions_by_invoice_id(id)
+    @transactions ||= @repo.find_all_transactions_by_invoice_id(id)
   end
 
   def invoice_items
@@ -47,6 +47,7 @@ class Invoice
   end
 
   def charge(card)
+    @transactions     = nil
     credit_num        = card[:credit_card_number]
     credit_ex         = card[:credit_card_expiration]
     result            = card[:result]

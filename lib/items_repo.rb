@@ -75,13 +75,6 @@ class ItemsRepository
         end
       end
     end.flatten
-
-  end
-
-  def get_successful_transactions(invoice)
-    invoice.transactions.select do|transaction|
-      transaction.result == "success"
-    end
   end
 
   def most_items(num_of_top_items)
