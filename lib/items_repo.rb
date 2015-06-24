@@ -67,7 +67,7 @@ class ItemsRepository
   end
 
   def get_invoice_items(item)
-    invoice_items_array = item.invoice_items
+    invoice_items_array ||= item.invoice_items
     return invoice_items_array.map do |invoice_item|
       invoice_item.invoice.transactions.map do |transaction|
         if transaction.result == "success"

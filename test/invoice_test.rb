@@ -96,4 +96,26 @@ class InvoiceTest < Minitest::Test
     repo.verify
   end
 
+  def test_charge_creates_a_new_transaction
+    engine = SalesEngine.new
+    engine.transaction_repository = TransactionRepository.new([{id: 2, invoice_id: "37",  created_at: "2012-03-26 09:54:09 UTC",
+                                    updated_at: "2012-03-26 09:54:09 UTC"},
+                                    {id: 1, invoice_id: "37",  created_at: "2012-03-26 09:54:09 UTC",
+                                    updated_at: "2012-03-26 09:54:09 UTC"}], engine)
+    repo = InvoiceRepository.new([{id:"4",customer_id:"67",merchant_id:"5",
+                                status:"shipped",
+                                created_at:"2012-03-25 09:54:09 UTC",
+                                updated_at:"2012-03-25 09:54:09 UTC"}], engine )
+
+    merchant_repo = MerchantRepository.new([{id: 5, name: "Joe",  created_at: "2012-03-26 09:54:09 UTC",
+                              updated_at: "2012-03-26 09:54:09 UTC"}], "sales_engine")
+    engine.invoice_repository  = repo
+    engine.merchant_repository = merchant_repo
+    invoice = repo.find_by_id(4)
+    invoice.charge({credit_card_number: "4444333322221111",
+                    credit_card_expiration: "10/13", result: "success"})
+    assert_equal 3, engine.transaction_repository.instances.size
+  end
+
+
 end

@@ -14,8 +14,12 @@ class TransactionRepository
 
   def manage
     return data.map do |line|
-      Transaction.new(line, self)
+      create_new_transaction(line)
     end
+  end
+
+  def create_new_transaction(line)
+     Transaction.new(line, self)
   end
 
   def inspect

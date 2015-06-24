@@ -48,7 +48,7 @@ class Merchant
   end
 
   def get_invoice_items(date)
-    invoices_array = parse_date(date)
+    invoices_array ||= parse_date(date)
     return invoices_array.map do |invoice|
       invoice.transactions.map do |transaction|
         if transaction.result == "success"

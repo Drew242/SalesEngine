@@ -28,16 +28,16 @@ class Item
   end
 
   def invoice_items
-    @repo.find_invoice_items_by_item_id(id)
+    @invoice_items ||= @repo.find_invoice_items_by_item_id(id)
   end
 
   def merchant
-    @repo.find_merchant_by_merchant_id(merchant_id)
+    @merchant ||= @repo.find_merchant_by_merchant_id(merchant_id)
   end
 
   def get_invoice_items
-    invoice_items_array = invoice_items
-    success =  invoice_items_array.map do |invoice_item|
+    invoice_items_array ||= invoice_items
+    success ||=  invoice_items_array.map do |invoice_item|
       invoice_item.invoice.transactions.map do |transaction|
         if transaction.result == "success"
           invoice_item

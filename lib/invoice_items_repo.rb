@@ -12,8 +12,12 @@ class InvoiceItemsRepository
 
   def manage
     return data.map do |line|
-      InvoiceItem.new(line, self)
+      create_new_item_invoice(line)
     end
+  end
+
+  def create_new_item_invoice(line)
+    InvoiceItem.new(line, self)
   end
 
   def inspect

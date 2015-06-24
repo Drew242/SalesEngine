@@ -19,21 +19,22 @@ class Customer
   end
 
   def invoices
-    @repo.find_all_invoices_by_id(id)
+    @invoices ||= @repo.find_all_invoices_by_id(id)
   end
 
   def favorite_merchant
     merchants = get_successful_transactions(invoices).map do |invoice|
       invoice.merchant
     end
-    merchant_groups = group_merchants
+    merchant_groups = group_merchants(merchants)
     top_merchant = find_most_used_merchant(merchant_groups)
     top_merchant[0]
   end
 
   def get_successful_transactions(invoices)
     invoices.map do |invoice|
-      invoice.transactions.map do|transaction|
+      transactions ||= invoice.transactions
+      transactions.map do|transaction|
         transaction.result == "success"
         invoice
       end
@@ -50,13 +51,15 @@ class Customer
     merchants.group_by do |merchant|
       merchant.name
     end.values
+  end
 
-    def transactions
-      invoices.map do |invoice|
-        invoice.transactions.map do |transaction|
-          transaction
-        end
+  def transactions
+    invoices.map do |invoice|
+      invoice.transactions.map do |transaction|
+        transaction
       end
     end
 
+
   end
+end

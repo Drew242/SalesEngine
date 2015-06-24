@@ -1,5 +1,6 @@
 require_relative '../test/test_helper'
-
+require_relative '../lib/customer'
+require_relative '../lib/merchant'
 
 class InvoiceRepoTest < Minitest::Test
   def setup
@@ -162,6 +163,28 @@ class InvoiceRepoTest < Minitest::Test
                                    updated_at: "2012-03-26 09:54:09 UTC"}], "sales_engine")
     result = repo.find_all_by_customer_id(2)
     assert_equal 1, result.size
+  end
+
+  def test_can_create_invoice_on_the_fly
+    engine = SalesEngine.new
+    engine.invoice_item_repository = InvoiceItemsRepository.new([{id:"4",customer_id:"67",merchant_id:"5",
+                                unit_price: "1326437",
+                                created_at:"2012-03-25 09:54:09 UTC",
+                                updated_at:"2012-03-25 09:54:09 UTC"}], engine)
+    repo = InvoiceRepository.new([{id:"4",customer_id:"67",merchant_id:"5",
+                                status:"shipped",
+                                created_at:"2012-03-25 09:54:09 UTC",
+                                updated_at:"2012-03-25 09:54:09 UTC"}], engine )
+    invoice = repo.create({customer: Customer.new({id: "3", updated_at: Time.new.to_s, created_at: Time.new.to_s}, "repo"),
+                            merchant: Merchant.new({id: "2", updated_at: Time.new.to_s, created_at: Time.new.to_s},
+                            "repo"), status: "shipped",
+                             items: [Item.new({unit_price: "28935", created_at:"2012-03-25 09:54:09 UTC",
+                             updated_at:"2012-03-25 09:54:09 UTC"}, engine),
+                             Item.new({unit_price: "28935", created_at:"2012-03-25 09:54:09 UTC",
+                             updated_at:"2012-03-25 09:54:09 UTC"}, engine),
+                             Item.new({unit_price: "28935", created_at:"2012-03-25 09:54:09 UTC",
+                             updated_at:"2012-03-25 09:54:09 UTC"}, engine)]})
+    assert_equal Invoice, invoice.class
   end
 
 end
