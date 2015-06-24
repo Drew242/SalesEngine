@@ -26,7 +26,7 @@ class SalesEngine
     invoices       = reader.read("#{@dir}/invoices.csv")
     invoice_items  = reader.read("#{@dir}/invoice_items.csv")
     items          = reader.read("#{@dir}/items.csv")
-    @merchant_repository  = MerchantRepository.new(merchants, self)
+    @merchant_repository     = MerchantRepository.new(merchants, self)
     @customer_repository     = CustomerRepository.new(customers, self)
     @transaction_repository  = TransactionRepository.new(transactions, self)
     @invoice_repository      = InvoiceRepository.new(invoices, self)

@@ -47,4 +47,38 @@ class CustomerTest < Minitest::Test
     repo.verify
   end
 
+  def test_favorite_merchant_returns_merchant_with_most_transactions
+
+    engine = SalesEngine.new
+    reader = FileReader.new
+    repo   = CustomerRepository.new(reader.read(File.expand_path("../test/fixtures/customers.csv", __dir__)),
+                                      engine)
+    engine.invoice_repository     = InvoiceRepository.new(reader.read(File.expand_path("../test/fixtures/invoices.csv", __dir__)),
+                                      engine)
+    engine.merchant_repository    = MerchantRepository.new(reader.read(File.expand_path("../test/fixtures/merchants.csv", __dir__)),
+                                      engine)
+    engine.transaction_repository = TransactionRepository.new(reader.read(File.expand_path("../test/fixtures/transactions.csv", __dir__)),
+                                      engine)
+    engine.customer_repository    = repo
+
+    customer = repo.find_by_id(2)
+    assert_equal "Osinski, Pollich and Koelpin", customer.favorite_merchant.name
+  end
+
+  def test_transactions_returns_transactions_associated_with_customer
+
+    engine = SalesEngine.new
+    reader = FileReader.new
+    repo   = CustomerRepository.new(reader.read(File.expand_path("../test/fixtures/customers.csv", __dir__)),
+                                      engine)
+    engine.invoice_repository     = InvoiceRepository.new(reader.read(File.expand_path("../test/fixtures/invoices.csv", __dir__)),
+                                      engine)
+    engine.transaction_repository = TransactionRepository.new(reader.read(File.expand_path("../test/fixtures/transactions.csv", __dir__)),
+                                      engine)
+    engine.customer_repository    = repo
+
+    customer = repo.find_by_id(3)
+    assert_equal 3, customer.transactions.size
+  end
+
 end

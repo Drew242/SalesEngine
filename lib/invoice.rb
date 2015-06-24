@@ -1,4 +1,4 @@
-require 'bigdecimal'
+  require 'bigdecimal'
 class Invoice
   attr_reader :id,
               :customer_id,
@@ -43,7 +43,7 @@ class Invoice
   end
 
   def merchant
-    @repo.find_a_merchant_by_invoice_id(merchant_id)
+    @repo.find_a_merchant_by_merchant_id(merchant_id)
   end
 
 end

@@ -91,7 +91,7 @@ class InvoiceTest < Minitest::Test
     invoice = Invoice.new({id: 2, name: "Joe", merchant_id: "5",
                           created_at: "2012-03-26 09:54:09 UTC",
                           updated_at: "2012-03-26 09:54:09 UTC"}, repo)
-    repo.expect(:find_a_merchant_by_invoice_id, [], [invoice.merchant_id])
+    repo.expect(:find_a_merchant_by_merchant_id, [], [invoice.merchant_id])
     invoice.merchant
     repo.verify
   end

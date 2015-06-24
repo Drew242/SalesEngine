@@ -22,4 +22,41 @@ class Customer
     @repo.find_all_invoices_by_id(id)
   end
 
-end
+  def favorite_merchant
+    merchants = get_successful_transactions(invoices).map do |invoice|
+      invoice.merchant
+    end
+    merchant_groups = group_merchants
+    top_merchant = find_most_used_merchant(merchant_groups)
+    top_merchant[0]
+  end
+
+  def get_successful_transactions(invoices)
+    invoices.map do |invoice|
+      invoice.transactions.map do|transaction|
+        transaction.result == "success"
+        invoice
+      end
+    end.flatten
+  end
+
+  def find_most_used_merchant(merchant_groups)
+    merchant_groups.max_by do |group|
+      group.size
+    end
+  end
+
+  def group_merchants(merchants)
+    merchants.group_by do |merchant|
+      merchant.name
+    end.values
+
+    def transactions
+      invoices.map do |invoice|
+        invoice.transactions.map do |transaction|
+          transaction
+        end
+      end
+    end
+
+  end

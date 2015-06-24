@@ -150,8 +150,8 @@ class InvoiceRepoTest < Minitest::Test
     engine = Minitest::Mock.new
     invoice_repo = InvoiceRepository.new([{id: 2, name: "Joe",  created_at: "2012-03-26 09:54:09 UTC",
                                           updated_at: "2012-03-26 09:54:09 UTC"}], engine)
-    engine.expect(:find_a_merchant_by_invoice_id, [], [2])
-    invoice_repo.find_a_merchant_by_invoice_id(2)
+    engine.expect(:find_merchant_by_merchant_id, [], [2])
+    invoice_repo.find_a_merchant_by_merchant_id(2)
     engine.verify
   end
 

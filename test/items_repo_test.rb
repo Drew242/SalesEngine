@@ -116,7 +116,7 @@ class ItemsRepoTest < Minitest::Test
     transaction_data               = reader.read(File.expand_path("../test/fixtures/transactions.csv", __dir__))
     engine.transaction_repository  = TransactionRepository.new(transaction_data, engine)
     engine.item_repository         = repo
-    assert_equal "Item Qui Esse", repo.most_revenue(1)[0].name
+    assert_equal "Item Expedita Aliquam", repo.most_revenue(1)[0].name
   end
 
   def test_most_items_will_return_top_items_sold
@@ -131,7 +131,7 @@ class ItemsRepoTest < Minitest::Test
     transaction_data               = reader.read(File.expand_path("../test/fixtures/transactions.csv", __dir__))
     engine.transaction_repository  = TransactionRepository.new(transaction_data, engine)
     engine.item_repository         = repo
-    assert_equal "Item Qui Esse", repo.most_items(1)[0].name
+    assert_equal "Item Autem Minima", repo.most_items(1)[0].name
   end
 
 

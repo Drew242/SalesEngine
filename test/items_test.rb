@@ -72,4 +72,20 @@ class ItemTest < Minitest::Test
     repo.verify
   end
 
+  def test_best_day_returns_day_with_highest_dales
+    engine = SalesEngine.new
+    reader = FileReader.new
+    repo   = ItemsRepository.new(reader.read(File.expand_path("../test/fixtures/items.csv", __dir__)),
+                                      engine)
+    engine.invoice_repository  = InvoiceRepository.new(reader.read(File.expand_path("../test/fixtures/invoices.csv", __dir__)),
+                                      engine)
+    engine.invoice_item_repository = InvoiceItemsRepository.new(reader.read(File.expand_path("../test/fixtures/invoice_items.csv", __dir__)),
+                                      engine)
+    engine.transaction_repository = TransactionRepository.new(reader.read(File.expand_path("../test/fixtures/transactions.csv", __dir__)),
+                                      engine)
+    engine.item_repository    = repo
+
+    item = repo.find_by_id(4)
+    assert_equal Date.parse("2012-03-24 15:54:10 UTC"), item.best_day
+  end
 end
