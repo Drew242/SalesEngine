@@ -60,7 +60,7 @@ class Merchant
 
   def favorite_customer
     grouped = group_invoices_by_customers
-    top = find_most_successful_customer(grouped)
+    top     = find_most_successful_customer(grouped)
     top[0].customer
   end
 
