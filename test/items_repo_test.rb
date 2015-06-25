@@ -105,7 +105,7 @@ class ItemsRepoTest < Minitest::Test
   end
 
   def test_most_revenue_will_return_top_items_by_total_revenue
-    reader = FileReader.new
+    reader                         = FileReader.new
     data                           = reader.read(@file)
     engine                         = SalesEngine.new
     repo                           = ItemsRepository.new(data, engine)
@@ -120,7 +120,7 @@ class ItemsRepoTest < Minitest::Test
   end
 
   def test_most_items_will_return_top_items_sold
-    reader = FileReader.new
+    reader                         = FileReader.new
     data                           = reader.read(@file)
     engine                         = SalesEngine.new
     repo                           = ItemsRepository.new(data, engine)

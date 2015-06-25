@@ -1,12 +1,12 @@
-  require 'bigdecimal'
+require 'bigdecimal'
 class Invoice
   attr_reader :id,
-              :customer_id,
-              :merchant_id,
-              :status,
-              :created,
-              :updated,
-              :repo
+  :customer_id,
+  :merchant_id,
+  :status,
+  :created,
+  :updated,
+  :repo
 
   def initialize(data, repo)
     @id          = data[:id].to_i
@@ -31,7 +31,7 @@ class Invoice
   end
 
   def invoice_items
-   @invoice_items ||= @repo.find_all_invoice_items_by_invoice_id(id)
+    @invoice_items ||= @repo.find_all_invoice_items_by_invoice_id(id)
   end
 
   def items
@@ -46,8 +46,12 @@ class Invoice
     @merchant ||= @repo.find_a_merchant_by_merchant_id(merchant_id)
   end
 
+  def reset_transactions
+    @transactions = nil
+  end
+
   def charge(card)
-    @transactions     = nil
+    reset_transactions
     credit_num        = card[:credit_card_number]
     credit_ex         = card[:credit_card_expiration]
     result            = card[:result]
@@ -60,9 +64,9 @@ class Invoice
 
   def create_transaction(credit_num, credit_ex, result, id)
     {id: id, invoice_id: self.id, credit_card_number: credit_num,
-       credit_card_expiration: credit_ex,
-       merchant_id: (self.merchant).id, created_at: Time.new.to_s,
-       updated_at: Time.new.to_s, result: result}
+      credit_card_expiration: credit_ex,
+      merchant_id: (self.merchant).id, created_at: Time.new.to_s,
+      updated_at: Time.new.to_s, result: result}
   end
 
 end

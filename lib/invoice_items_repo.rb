@@ -25,39 +25,27 @@ class InvoiceItemsRepository
   end
 
   def find_by_quantity(quantity)
-    instances.select do |instance|
-      if instance.quantity == quantity
-        return instance
-      end
+    instances.detect do |instance|
+      instance.quantity == quantity
     end
-    return nil
   end
 
   def find_by_item_id(id)
-    instances.select do |instance|
-      if instance.item_id == id
-        return instance
-      end
+    instances.detect do |instance|
+      instance.item_id == id
     end
-    return nil
   end
 
   def find_all_by_item_id(id)
-    total = []
     instances.select do |instance|
-      if instance.item_id == id
-        total << instance
-      end
+       instance.item_id == id
     end
   end
 
 
   def find_all_by_quantity(quantity)
-    result = []
     instances.select do |instance|
-      if instance.quantity == quantity
-        result << instance
-      end
+      instance.quantity == quantity
     end
   end
 

@@ -19,7 +19,7 @@ class TransactionRepository
   end
 
   def create_new_transaction(line)
-     Transaction.new(line, self)
+    Transaction.new(line, self)
   end
 
   def inspect
@@ -27,22 +27,15 @@ class TransactionRepository
   end
 
   def find_by_credit_card_number(num)
-    instances.select do |instance|
-      if instance.cc_num.include?(num)
-        return instance
-      end
+    instances.detect do |instance|
+      instance.cc_num.include?(num)
     end
-    return nil
   end
 
   def find_all_by_result(input)
-    result =[]
     instances.select do |instance|
-      if instance.result == input
-        result << instance
-      end
+      instance.result == input
     end
-    return result
   end
 
   def find_an_invoice_by_invoice_id(instance)

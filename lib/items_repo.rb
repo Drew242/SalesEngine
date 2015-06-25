@@ -24,12 +24,9 @@ class ItemsRepository
   end
 
   def find_by_description(description)
-    instances.select do |instance|
-      if instance.description.downcase.include?(description.downcase)
-        return instance
-      end
+    instances.detect do |instance|
+      instance.description.downcase.include?(description.downcase)
     end
-    return nil
   end
 
   def find_invoice_items_by_item_id(instance)
@@ -41,13 +38,9 @@ class ItemsRepository
   end
 
   def find_all_by_item_id(id)
-    result =[]
     instances.select do |instance|
-      if instance.item_id == id
-        result << instance
-      end
+      instance.item_id == id
     end
-    return result
   end
 
 

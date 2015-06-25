@@ -72,7 +72,7 @@ class ItemTest < Minitest::Test
     repo.verify
   end
 
-  def test_best_day_returns_day_with_highest_dales
+  def test_best_day_returns_day_with_highest_sales
     engine = SalesEngine.new
     reader = FileReader.new
     repo   = ItemsRepository.new(reader.read(File.expand_path("../test/fixtures/items.csv", __dir__)),

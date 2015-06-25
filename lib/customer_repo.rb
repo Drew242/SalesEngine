@@ -21,31 +21,21 @@ class CustomerRepository
   end
 
   def find_by_first_name(first_name)
-    instances.select do |instance|
-      if instance.first_name.downcase.include?(first_name.downcase)
-        return instance
-      end
+    instances.detect do |instance|
+      instance.first_name.downcase.include?(first_name.downcase)
     end
-    return nil
   end
 
   def find_all_by_first_name(first_name)
-    customers = []
     instances.select do |instance|
-      if instance.first_name.downcase.include?(first_name.downcase)
-        customers << instance
-      end
+      instance.first_name.downcase.include?(first_name.downcase)
     end
-    customers
   end
 
   def find_by_last_name(last_name)
-    instances.select do |instance|
-      if instance.last_name.downcase.include?(last_name.downcase)
-        return instance
-      end
+    instances.detect do |instance|
+      instance.last_name.downcase.include?(last_name.downcase)
     end
-    return nil
   end
 
   def find_all_invoices_by_id(instance)

@@ -18,131 +18,84 @@ module ListSearch
   end
 
   def find_by_name(name)
-    instances.select do |instance|
-      if instance.name.downcase == name.downcase
-        return instance
-      end
+    instances.detect do |instance|
+      instance.name.downcase == name.downcase
     end
-    return nil
   end
 
 
   def find_all_by_name(name)
-    result =[]
     instances.select do |instance|
-      if instance.name.downcase == name.downcase
-        result << instance
-      end
+      instance.name.downcase == name.downcase
     end
-    return result
   end
 
 
   def find_by_created_at(date)
-    instances.select do |instance|
-      if instance.created == Date.parse(date)
-        return instance
-      end
+    instances.detect do |instance|
+      instance.created == Date.parse(date)
     end
-    return nil
   end
 
   def find_by_updated_at(date)
-    instances.select do |instance|
-      if instance.updated == Date.parse(date)
-        return instance
-      end
+    instances.detect do |instance|
+      instance.updated == Date.parse(date)
     end
-    return nil
   end
 
   def find_all_by_id(id)
-    result =[]
     instances.select do |instance|
-      if instance.id == id
-        result << instance
-      end
+      instance.id == id
     end
-    return result
   end
 
   def find_all_by_created_at(created_at)
-
-    result =[]
     instances.select do |instance|
-      if instance.created == Date.parse(created_at)
-        result << instance
-      end
+      instance.created == Date.parse(created_at)
     end
-    return result
   end
 
   def find_all_by_updated_at(updated_at)
-    result =[]
     instances.select do |instance|
-      if instance.updated == Date.parse(updated_at)
-        result << instance
-      end
+      instance.updated == Date.parse(updated_at)
     end
-    return result
   end
 
   def find_all_by_unit_price(price)
-    result =[]
     instances.select do |instance|
-      if instance.price == price
-        result << instance
-      end
+      instance.price == price
     end
-    return result
   end
 
   def find_by_merchant_id(id)
-    instances.select do |instance|
-      if instance.merchant_id == id
-        return instance
-      end
+    instances.detect do |instance|
+    instance.merchant_id == id
     end
-    return nil
   end
 
   def find_all_by_merchant_id(id)
-    result =[]
     instances.select do |instance|
-      if instance.merchant_id == id
-        result << instance
-      end
+      instance.merchant_id == id
     end
-    return result
   end
 
 
   def find_by_invoice_id(id)
-    instances.select do |instance|
-      if instance.invoice_id == id
-        return instance
-      end
+    instances.detect do |instance|
+      instance.invoice_id == id
     end
-    return nil
   end
 
   def find_all_by_invoice_id(id)
-    total = []
-    instances.map do |instance|
-      if instance.invoice_id == id
-        total << instance
-      end
+    instances.select do |instance|
+    instance.invoice_id == id
     end
-    return total
   end
 
   def find_by_unit_price(price)
-    instances.each do |instance|
-      if instance.price == price
-        return instance
-      end
+    instances.detect do |instance|
+      instance.price == price
     end
-    return nil
   end
 
 end
