@@ -88,13 +88,15 @@ class InvoiceRepository
     created_at   = Time.new.to_s
     updated_at   = Time.new.to_s
     items        = new_invoice[:items]
-    invoice      = parse_invoice(customer, merchant, status, invoice_id, created_at, updated_at)
+    invoice      = parse_invoice(customer, merchant, status,
+     invoice_id, created_at, updated_at)
     @instances << invoice
     create_invoice_items(items, invoice_id)
     invoice
   end
 
-  def parse_invoice(customer, merchant, status, invoice_id, created_at, updated_at)
+  def parse_invoice(customer, merchant, status,
+     invoice_id, created_at, updated_at)
     Invoice.new({customer_id: customer.id,
                 merchant_id: merchant.id,
                 status: status,
@@ -119,8 +121,10 @@ class InvoiceRepository
 
   def create_invoice_item_hash(item, invoice_id, quantity, id)
     price = item.price
-    {id: id , item_id: item.id, invoice_id: invoice_id, quantity: quantity,
-      unit_price: price.to_s, created_at: Time.new.to_s, updated_at: Time.new.to_s}
+    {id: id , item_id: item.id, invoice_id: invoice_id,
+      quantity: quantity,
+      unit_price: price.to_s, created_at: Time.new.to_s,
+      updated_at: Time.new.to_s}
   end
 
   def push_to_invoice_items(invoice_items, ii_repo)

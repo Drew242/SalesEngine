@@ -47,7 +47,7 @@ class MerchantRepository
     end.flatten
     calculate_quantity(total)
   end
-  
+
   def calculate_quantity(total)
     quantities = total.compact.map do |invoice_item|
       invoice_item.quantity

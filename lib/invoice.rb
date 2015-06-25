@@ -60,7 +60,8 @@ class Invoice
 
   def create_transaction(credit_num, credit_ex, result, id)
     {id: id, invoice_id: self.id, credit_card_number: credit_num,
-       credit_card_expiration: credit_ex, merchant_id: (self.merchant).id, created_at: Time.new.to_s,
+       credit_card_expiration: credit_ex,
+       merchant_id: (self.merchant).id, created_at: Time.new.to_s,
        updated_at: Time.new.to_s, result: result}
   end
 
